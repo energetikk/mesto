@@ -6,4 +6,10 @@
    color: white;
    width: 150px;
    min-height: 50px;
+   opacity: 1;
+   transition: opacity .2s ease-out .1s;
+}
+
+.profile__addbutton:hover {
+  opacity: .6;
 }

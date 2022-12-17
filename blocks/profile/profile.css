@@ -2,4 +2,5 @@
     display: flex;
     max-width: calc(100% - 200px*2);
     margin: 0 auto;
+    padding: 40px 0 50px;
 }
