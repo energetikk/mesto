@@ -48,7 +48,14 @@
   font-size: 18px;
   line-height: 22px;
   border-radius: 2px;
+  opacity: 1;
+  transition: opacity .1s ease-in-out;
 }
+
+.popup__submit:hover {
+  opacity: .8;
+}
+
 
 .popup__form-title {
   font-family: "Inter", "Arial", sans-serif;

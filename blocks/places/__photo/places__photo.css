@@ -2,3 +2,10 @@
     max-width: 282px;
     border-radius: 10px 10px 0 0;
 }
+
+@media screen and (max-width: 615px) {
+  .places__photo {
+    max-width: 350px;
+    width: 100%;
+  }
+}

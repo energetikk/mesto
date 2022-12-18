@@ -1,5 +1,5 @@
 @import url(../vendor/normalize.css);
-@import url(../vendor/fonts////////////);
+@import url(../vendor/fonts/fonts.css);
 
 @import url(../blocks/page/page.css);
 
@@ -9,6 +9,7 @@
 
 
 @import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__heading/profile__heading.css);
 @import url(../blocks/profile/__main-photo/profile__main-photo.css);
 @import url(../blocks/profile/__occupation/profile__occupation.css);
 @import url(../blocks/profile/__name/profile_-name.css);

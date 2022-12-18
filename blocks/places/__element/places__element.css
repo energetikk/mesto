@@ -1,13 +1,14 @@
 .places__element {
     margin: 0;
-    padding: 0 0 31px;
+    padding: 0 0 25px;
     background-color: white;
     border-radius: 10px;
     line-height: 0;
     max-width: 282px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    /* display: flex; */
-    /* flex-direction: column; */
+}
+
+@media screen and (max-width: 615px) {
+  .places__element {
+    width: 350px;
+  }
 }

@@ -4,6 +4,17 @@
     align-content: center;
     justify-content: space-between;
     align-items: center;
-    max-width: 336px;
-    margin-right: 244px;
+}
+
+@media screen and (max-width: 879px) {
+  .profile__info {
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .profile__info {
+    flex-direction: column;
+    margin-bottom: 33px;
+  }
 }
