@@ -7,7 +7,7 @@
    width: 150px;
    min-height: 50px;
    opacity: 1;
-   transition: opacity .2s ease-out .1s;
+   transition: opacity .1s ease-out;
 }
 
 .profile__addbutton:hover {

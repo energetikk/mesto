@@ -20,7 +20,7 @@
         <img src="./images/profile-main-photo.jpg" alt="Фотография профиля пользователя" class="profile__main-photo">
         <div class="profile__heading">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <div class="profile__edit-button"></div>
+          <button class="profile__edit-button"></button>
           <p class="profile__occupation">Исследователь океана</p>
         </div>
       </div>
@@ -100,12 +100,13 @@
 <div class="popup">
     <form class="popup__container">
       <label for="GET-name" class="popup__form-title">Редактировать профиль</label>
-      <input id="GET-name" type="text" name="name" class="popup__input">
-      <input id="GET-name" type="text" name="name" class="popup__input">
-      <input type="submit" value="Сохранить" class="popup__submit">
-      <div class="popup__button-close"></div>
+      <input type="text" name="name" class="popup__input">
+      <input type="text" name="name" class="popup__input">
+      <button type="submit" class="popup__submit">Сохранить</button>
+      <button class="popup__button-close"></button>
     </form>
 </div>
+<script src="./js/script.js"></script>
 </body>
 
 </html>

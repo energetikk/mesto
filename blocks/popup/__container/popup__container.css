@@ -21,8 +21,8 @@
 .popup__button-close {
   background-image: url(../../../images/Close_Icon.svg);
   background-size: 100%;
-  /* border: 1px red solid; */
-
+  background-color: transparent;
+  border: none;
   width: 32px;
   height: 32px;
   position: absolute;
@@ -43,7 +43,6 @@
   width: 358px;
   min-height: 50px;
   align-self: center;
-
   font-family: "Inter", "Arial", sans-serif;
   font-size: 18px;
   line-height: 22px;
@@ -63,7 +62,6 @@
   font-size: 24px;
   line-height: 29px;
   color: black;
-
 }
 
 .popup__input {
@@ -73,4 +71,32 @@
   font-size: 14px;
   line-height: 17px;
   font-family: "Inter", "Arial", sans-serif;
+}
+
+
+@media screen and (max-width: 615px) {
+  .popup__container {
+    width: 282px;
+    height: 322px;
+    padding: 25px 22px;
+    box-sizing: border-box;
+  }
+
+  .popup__form-title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .popup__button-close {
+    width: 20px;
+    height: 20px;
+    top: -36px;
+    right: 0;
+  }
+
+  .popup__submit {
+    width: 238px;
+    min-height: 46px;
+  }
+
 }
