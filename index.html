@@ -19,8 +19,10 @@
       <div class="profile__info">
         <img src="./images/profile-main-photo.jpg" alt="Фотография профиля пользователя" class="profile__main-photo">
         <div class="profile__heading">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button class="profile__edit-button"></button>
+          <div class="profile__title">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <button type="button" class="profile__edit-button"></button>
+          </div>
           <p class="profile__occupation">Исследователь океана</p>
         </div>
       </div>
@@ -35,7 +37,7 @@
               alt="Изображение крепости в горах. г. Карачаевск">
             <figcaption class="places__card">
               <p class="places__card-name">Карачаевск</p>
-              <button class="places__button-like"></button>
+              <button class="places__button-like places__button-like_active"></button>
             </figcaption>
           </figure>
         </li>
@@ -45,7 +47,7 @@
               alt="Изображение крепости в горах. г. Карачаевск">
             <figcaption class="places__card">
               <p class="places__card-name">Гора Эльбрус</p>
-              <button class="places__button-like"></button>
+              <button class="places__button-like places__button-like_active"></button>
             </figcaption>
           </figure>
         </li>
@@ -55,7 +57,7 @@
               alt="Изображение крепости в горах. г. Карачаевск">
             <figcaption class="places__card">
               <p class="places__card-name">Домбай</p>
-              <button class="places__button-like"></button>
+              <button class="places__button-like places__button-like_active"></button>
             </figcaption>
           </figure>
         </li>
@@ -65,7 +67,7 @@
               alt="Изображение крепости в горах. г. Карачаевск">
             <figcaption class="places__card">
               <p class="places__card-name">Гора Эльбрус</p>
-              <button class="places__button-like"></button>
+              <button class="places__button-like places__button-like_active"></button>
             </figcaption>
           </figure>
         </li>
@@ -75,7 +77,7 @@
               alt="Изображение крепости в горах. г. Карачаевск">
             <figcaption class="places__card">
               <p class="places__card-name">Домбай</p>
-              <button class="places__button-like"></button>
+              <button class="places__button-like places__button-like_active"></button>
             </figcaption>
           </figure>
         </li>
@@ -85,7 +87,7 @@
               alt="Изображение крепости в горах. г. Карачаевск">
             <figcaption class="places__card">
               <p class="places__card-name">Карачаево-Черкесск</p>
-              <button class="places__button-like"></button>
+              <button class="places__button-like places__button-like_active"></button>
             </figcaption>
           </figure>
         </li>
@@ -100,13 +102,13 @@
 <div class="popup">
     <form class="popup__container">
       <label for="GET-name" class="popup__form-title">Редактировать профиль</label>
-      <input type="text" name="name" class="popup__input">
-      <input type="text" name="name" class="popup__input">
+      <input type="text" name="name" class="popup__nameInput popup__input">
+      <input type="text" name="name" class="popup__jobInput popup__input">
       <button type="submit" class="popup__submit">Сохранить</button>
-      <button class="popup__button-close"></button>
+      <button type="button" class="popup__button-close"></button>
     </form>
 </div>
-<script src="./js/script.js"></script>
+<script src="./scripts/index.js"></script>
 </body>
 
 </html>
