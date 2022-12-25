@@ -1,4 +1,4 @@
-.profile__occupation {
+.profile__job {
   margin: 0;
   padding: 7px 0 0;
   max-width: 336px;
@@ -11,11 +11,22 @@
   overflow: hidden;
 }
 
+@media screen and (max-width: 650px) {
+  .profile__job {
+    max-width: 280px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .profile__job {
+    max-width: 240px;
+  }
+}
+
 @media screen and (max-width: 320px) {
-  .profile__occupation {
+  .profile__job {
     font-size: 14px;
     line-height: 17px;
     padding-top: 7px;
-    max-width: 300px;
   }
 }

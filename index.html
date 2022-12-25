@@ -23,10 +23,10 @@
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <button type="button" class="profile__edit-button"></button>
           </div>
-          <p class="profile__occupation">Исследователь океана</p>
+          <p class="profile__job">Исследователь океана</p>
         </div>
       </div>
-      <div class="profile__addbutton"></div>
+      <button type="button" class="profile__addbutton"></button>
     </section>
     <section class="places">
       <ul class="places__photo-cards">
@@ -36,7 +36,7 @@
               alt="Изображение крепости в горах. г. Карачаевск">
             <figcaption class="places__card">
               <p class="places__card-name">Карачаевск</p>
-              <button class="places__button-like places__button-like_active"></button>
+              <button type="button" class="places__button-like places__button-like_active"></button>
             </figcaption>
           </figure>
         </li>
@@ -46,7 +46,7 @@
               alt="Изображение крепости в горах. г. Карачаевск">
             <figcaption class="places__card">
               <p class="places__card-name">Гора Эльбрус</p>
-              <button class="places__button-like places__button-like_active"></button>
+              <button type="button" class="places__button-like places__button-like_active"></button>
             </figcaption>
           </figure>
         </li>
@@ -56,7 +56,7 @@
               alt="Изображение крепости в горах. г. Карачаевск">
             <figcaption class="places__card">
               <p class="places__card-name">Домбай</p>
-              <button class="places__button-like places__button-like_active"></button>
+              <button type="button" class="places__button-like places__button-like_active"></button>
             </figcaption>
           </figure>
         </li>
@@ -66,7 +66,7 @@
               alt="Изображение крепости в горах. г. Карачаевск">
             <figcaption class="places__card">
               <p class="places__card-name">Гора Эльбрус</p>
-              <button class="places__button-like places__button-like_active"></button>
+              <button type="button" class="places__button-like places__button-like_active"></button>
             </figcaption>
           </figure>
         </li>
@@ -76,7 +76,7 @@
               alt="Изображение крепости в горах. г. Карачаевск">
             <figcaption class="places__card">
               <p class="places__card-name">Домбай</p>
-              <button class="places__button-like places__button-like_active"></button>
+              <button type="button" class="places__button-like places__button-like_active"></button>
             </figcaption>
           </figure>
         </li>
@@ -86,7 +86,7 @@
               alt="Изображение крепости в горах. г. Карачаевск">
             <figcaption class="places__card">
               <p class="places__card-name">Карачаево-Черкесск</p>
-              <button class="places__button-like places__button-like_active"></button>
+              <button type="button" class="places__button-like places__button-like_active"></button>
             </figcaption>
           </figure>
         </li>
@@ -98,16 +98,20 @@
   <footer class="footer">
     <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
   </footer>
-<div class="popup">
-    <form class="popup__container">
-      <label class="popup__form-title">Редактировать профиль</label>
-      <input type="text" name="name" class="popup__nameInput popup__input">
-      <input type="text" name="name" class="popup__jobInput popup__input">
-      <button type="submit" class="popup__submit">Сохранить</button>
+  <div class="popup">
+    <div class="popup__container">
+      <form name="info" class="form">
+        <h2 class="form__title">Редактировать профиль</h2>
+        <fieldset class="form__input-container">
+          <input type="text" name="name" class="form__item form__item_el_name">
+          <input type="text" name="name" class="form__item form__item_el_job">
+        </fieldset>
+        <button type="submit" class="form__submit">Сохранить</button>
+      </form>
       <button type="button" class="popup__button-close"></button>
-    </form>
-</div>
-<script src="./scripts/index.js"></script>
+    </div>
+  </div>
+  <script src="./scripts/index.js"></script>
 </body>
 
 </html>

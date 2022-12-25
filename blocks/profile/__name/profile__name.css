@@ -18,10 +18,17 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 768px) {
   .profile__name {
     font-size: 27px;
     line-height: 33px;
+    max-width: 260px;
+  }
+}
+
+@media screen and (max-width: 615px) {
+  .profile__name {
+    margin-right: 0;
     max-width: 225px;
   }
 }

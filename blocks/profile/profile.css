@@ -1,20 +1,15 @@
 .profile {
     display: flex;
     justify-content: space-between;
-    /* max-width: calc(100% - 200px*2); */
+    align-items: center;
     max-width: 100%;
-
     margin: 0 auto;
     padding: 40px 0 50px;
 }
 
 @media screen and (max-width: 879px) {
   .profile {
-    /* flex-direction: column;
-    align-items: center; */
     max-width: calc(100% - 15px*2);
-    /* padding: 42px 0 37px; */
-
   }
 }
 
@@ -22,7 +17,6 @@
   .profile {
     flex-direction: column;
     align-items: center;
-
   }
 }
 
@@ -32,6 +26,5 @@
 
     max-width: calc(100% - 19px*2);
     padding: 42px 0 37px;
-
   }
 }
