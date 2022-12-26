@@ -2,11 +2,7 @@
   background-color: white;
   opacity: 1;
   width: 430px;
-  position: absolute;
-  top: 50%;
-  right: 50%;
-  transform: translate(50%,-50%);
-  text-align: left;
+  position: relative;
   padding: 34px 36px 37px 36px;
   border-radius: 10px;
   box-sizing: border-box;
@@ -16,7 +12,12 @@
 @media screen and (max-width: 615px) {
   .popup__container {
     width: 282px;
-    height: 322px;
     padding: 25px 22px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .popup__container {
+    padding: 25px 22x;
   }
 }
