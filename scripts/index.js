@@ -1,6 +1,106 @@
+//Добавление первых 6 карточек на странице
+
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+initialCards.forEach((card) => {
+  const name = card.name;
+  const link = card.link;
+  // Выбираем элемент куда будем вставлять
+  const placesPhotoCards = document.querySelector('.places__photo-cards');
+  //Помещаем элемент из шаблона в переменную
+  const templateCards = document.querySelector('#template-cards').content;
+  // console.log(templateCards);
+
+  const cardsElement = templateCards.querySelector('.places__element').cloneNode(true);
+  // console.log(cardsElement);
+  cardsElement.querySelector('.places__photo').src = card.link;
+  cardsElement.querySelector('.places__card-name').textContent = card.name;
+  cardsElement.querySelector('.places__photo').alt = card.name;
+  placesPhotoCards.append(cardsElement);
+});
+
+
+
+
+
+
+
 let editProfile = document.querySelector('.profile__edit-button');
 let popup = document.querySelector('.popup');
-let popupClose = popup.querySelector('.popup__button-close');
+
+// Закрытие поппапов
+let popupClose = popup.querySelectorAll('.popup__button-close');
+console.log(popupClose);
+
+function closepopup(popupitem) {
+  popupitem.classList.remove('popup_opened');
+};
+
+popupClose.forEach(buttonclose => {
+  buttonclose.addEventListener('click', function (evt) {
+    const btnClose = evt.currentTarget;
+    closepopup(btnClose.closest('.popup'));
+})
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let profileAddButton = document.querySelector('.profile__addbutton');
+let popupaddprofile = document.querySelector('.popup_addprofile');
+let popupAddPfofileClose = profileAddButton.querySelector('.popup__button-close');
+
+//Попап добавления профиля
+function addProfile() {
+  popupaddprofile.classList.add('popup_opened');
+}
+profileAddButton.addEventListener('click', addProfile);
+
+// Закрытие попапа добавления профиля
+
+// function closepopup() {
+//   popup.classList.remove('popup_opened');
+// }
+
+
 
 function editButton() {
   popup.classList.add('popup_opened');
@@ -43,4 +143,17 @@ function handleFormSubmit (evt) {
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', handleFormSubmit);
-popupClose.addEventListener('click', closepopup);
+// popupClose.addEventListener('click', closepopup);
+
+//// выберем кнопку лайка
+
+const btnlike = document.querySelectorAll('.places__button-like');
+
+
+const btnactive = (evt) => {
+  evt.target.classList.toggle('places__button-like_active');
+}
+
+btnlike.forEach(button => {
+  button.addEventListener('click', btnactive);
+});
