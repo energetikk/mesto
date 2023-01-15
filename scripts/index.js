@@ -54,17 +54,20 @@ let editProfile = document.querySelector('.profile__edit-button');
 let popup = document.querySelector('.popup');
 
 // Закрытие поппапов
-let popupClose = popup.querySelectorAll('.popup__button-close');
-console.log(popupClose);
+let popupClose = document.querySelectorAll('.popup__button-close');
+const array = Array.from(popupClose);
 
-function closepopup(popupitem) {
-  popupitem.classList.remove('popup_opened');
+console.log(popupClose);
+console.log(array.length);
+
+function closepopup(popup) {
+  popup.classList.remove('popup_opened');
 };
 
 popupClose.forEach(buttonclose => {
   buttonclose.addEventListener('click', function (evt) {
-    const btnClose = evt.currentTarget;
-    closepopup(btnClose.closest('.popup'));
+    const btnClose = evt.target.closest('.popup');
+    closepopup(btnClose);
 })
 });
 
@@ -108,10 +111,6 @@ function editButton() {
   jobInput.value = profileJob.textContent;
 }
 
-function closepopup() {
-  popup.classList.remove('popup_opened');
-}
-
 editProfile.addEventListener('click', editButton);
 // Находим форму в DOM
 let formElement = popup.querySelector('.popup__container');
@@ -145,15 +144,13 @@ function handleFormSubmit (evt) {
 formElement.addEventListener('submit', handleFormSubmit);
 // popupClose.addEventListener('click', closepopup);
 
-//// выберем кнопку лайка
 
+// выберем кнопку лайка
 const btnlike = document.querySelectorAll('.places__button-like');
-
-
+console.log(btnlike);
 const btnactive = (evt) => {
   evt.target.classList.toggle('places__button-like_active');
 }
-
 btnlike.forEach(button => {
   button.addEventListener('click', btnactive);
 });
