@@ -45,6 +45,53 @@ initialCards.forEach((card) => {
 });
 
 
+// Добавление карточки пользователями
+
+// Находим форму в DOM
+const form = document.querySelector('.popup_addprofile');
+const newCard = form.querySelector('.popup__container_form');
+console.log(form);
+
+//
+// Находим поля формы в DOM
+
+function formCard (evt) {
+  evt.preventDefault();
+  const nameInputForm = newCard.querySelector('.form__item_place_name');
+  const linkInputForm = newCard.querySelector('.form__item_place_link');
+  console.log(nameInputForm.value);
+  console.log(linkInputForm.value);
+
+
+
+  // Выбираем элемент куда будем вставлять
+  const placesPhotoCards = document.querySelector('.places__photo-cards');
+  //Помещаем элемент из шаблона в переменную
+  const templateCards = document.querySelector('#template-cards').content;
+  // console.log(templateCards);
+
+  const cardsElement = templateCards.querySelector('.places__element').cloneNode(true);
+  cardsElement.querySelector('.places__photo').src = `${linkInputForm.value}`;
+  cardsElement.querySelector('.places__card-name').textContent = nameInputForm.value;
+  cardsElement.querySelector('.places__photo').alt = nameInputForm.value;
+  placesPhotoCards.prepend(cardsElement);
+
+
+ // Кнопка лайка на добавленные карточки
+  const btnlike = document.querySelectorAll('.places__button-like');
+  console.log(btnlike);
+  const btnactive = (evt) => {
+    evt.target.classList.toggle('places__button-like_active');
+  }
+  btnlike.forEach(button => {
+    button.addEventListener('click', btnactive);
+  });
+
+
+}
+// слушатель события Submit отправки формы новой карточки
+form.addEventListener('submit', formCard);
+
 
 
 
@@ -55,10 +102,6 @@ let popup = document.querySelector('.popup');
 
 // Закрытие поппапов
 let popupClose = document.querySelectorAll('.popup__button-close');
-const array = Array.from(popupClose);
-
-console.log(popupClose);
-console.log(array.length);
 
 function closepopup(popup) {
   popup.classList.remove('popup_opened');
