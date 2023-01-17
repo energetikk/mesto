@@ -1,4 +1,4 @@
-//Добавление первых 6 карточек на странице
+//Добавление первых 6 карточек на страницу
 
 const initialCards = [
   {
@@ -28,72 +28,66 @@ const initialCards = [
 ];
 
 initialCards.forEach((card) => {
-  const name = card.name;
-  const link = card.link;
   // Выбираем элемент куда будем вставлять
   const placesPhotoCards = document.querySelector('.places__photo-cards');
   //Помещаем элемент из шаблона в переменную
   const templateCards = document.querySelector('#template-cards').content;
-  // console.log(templateCards);
-
+  //Клонируем элемент со всем содержимым
   const cardsElement = templateCards.querySelector('.places__element').cloneNode(true);
-  // console.log(cardsElement);
+  //Вставляем значения из массива в новый элемент
   cardsElement.querySelector('.places__photo').src = card.link;
   cardsElement.querySelector('.places__card-name').textContent = card.name;
   cardsElement.querySelector('.places__photo').alt = card.name;
+  //Добавляем элемент на страницу
   placesPhotoCards.append(cardsElement);
 });
 
 
 // Добавление карточки пользователями
+  // Находим форму в DOM
+  const form = document.querySelector('.popup_addprofile');
+  // Находим поля формы в DOM
+  const newCard = form.querySelector('.popup__container_form');
+  // Находим поля формы в DOM
 
-// Находим форму в DOM
-const form = document.querySelector('.popup_addprofile');
-const newCard = form.querySelector('.popup__container_form');
-console.log(form);
-
-//
-// Находим поля формы в DOM
 
 function formCard (evt) {
   evt.preventDefault();
+
   const nameInputForm = newCard.querySelector('.form__item_place_name');
   const linkInputForm = newCard.querySelector('.form__item_place_link');
   console.log(nameInputForm.value);
   console.log(linkInputForm.value);
 
-
-
   // Выбираем элемент куда будем вставлять
   const placesPhotoCards = document.querySelector('.places__photo-cards');
   //Помещаем элемент из шаблона в переменную
   const templateCards = document.querySelector('#template-cards').content;
-  // console.log(templateCards);
+
 
   const cardsElement = templateCards.querySelector('.places__element').cloneNode(true);
   cardsElement.querySelector('.places__photo').src = `${linkInputForm.value}`;
   cardsElement.querySelector('.places__card-name').textContent = nameInputForm.value;
   cardsElement.querySelector('.places__photo').alt = nameInputForm.value;
-  placesPhotoCards.prepend(cardsElement);
 
-
- // Кнопка лайка на добавленные карточки
-  const btnlike = document.querySelectorAll('.places__button-like');
-  console.log(btnlike);
-  const btnactive = (evt) => {
-    evt.target.classList.toggle('places__button-like_active');
-  }
-  btnlike.forEach(button => {
-    button.addEventListener('click', btnactive);
-  });
-
-
-}
+  // return initialCards.unshift({name: nameInputForm.value, link:`${linkInputForm.value}`});
 // слушатель события Submit отправки формы новой карточки
+  placesPhotoCards.prepend(cardsElement);
+  const popupprofileclose = document.querySelector('.popup_addprofile');
+  popupprofileclose.classList.remove('popup_opened');
+}
 form.addEventListener('submit', formCard);
 
+// Удаление карточек
+const deleteButton = document.querySelectorAll('.places__card-delete');
+const deletecard = (evt) => {
+  const delCard = evt.target.closest('.places__element');
+  delCard.remove('places__card-delete');
+}
 
-
+deleteButton.forEach(deleteBtn => {
+  deleteBtn.addEventListener('click', deletecard);
+});
 
 
 
@@ -101,8 +95,7 @@ let editProfile = document.querySelector('.profile__edit-button');
 let popup = document.querySelector('.popup');
 
 // Закрытие поппапов
-let popupClose = document.querySelectorAll('.popup__button-close');
-
+const popupClose = document.querySelectorAll('.popup__button-close');
 function closepopup(popup) {
   popup.classList.remove('popup_opened');
 };
@@ -190,7 +183,7 @@ formElement.addEventListener('submit', handleFormSubmit);
 
 // выберем кнопку лайка
 const btnlike = document.querySelectorAll('.places__button-like');
-console.log(btnlike);
+
 const btnactive = (evt) => {
   evt.target.classList.toggle('places__button-like_active');
 }
