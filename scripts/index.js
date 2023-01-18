@@ -26,8 +26,8 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-
-initialCards.forEach((card) => {
+function startCards(arr) {
+arr.forEach((card) => {
   // Выбираем элемент куда будем вставлять
   const placesPhotoCards = document.querySelector('.places__photo-cards');
   //Помещаем элемент из шаблона в переменную
@@ -39,8 +39,29 @@ initialCards.forEach((card) => {
   cardsElement.querySelector('.places__card-name').textContent = card.name;
   cardsElement.querySelector('.places__photo').alt = card.name;
   //Добавляем элемент на страницу
+
+
+
+
+
+
+
+
+
+
+
+
+
   placesPhotoCards.append(cardsElement);
 });
+}
+startCards(initialCards);
+
+
+
+
+
+
 
 
 // Добавление карточки пользователями
@@ -75,6 +96,31 @@ function formCard (evt) {
   placesPhotoCards.prepend(cardsElement);
   const popupprofileclose = document.querySelector('.popup_addprofile');
   popupprofileclose.classList.remove('popup_opened');
+
+
+
+  const btnlike = document.querySelectorAll('.places__button-like');
+  btnlike.forEach(button => {
+    button.addEventListener('click', btnactive);
+  });
+
+
+  const deleteButton = document.querySelectorAll('.places__card-delete');
+  deleteButton.forEach(deleteBtn => {
+    deleteBtn.addEventListener('click', deletecard);
+  });
+
+
+  const cardPhoto = document.querySelectorAll('.places__photo');
+  cardPhoto.forEach(image => {
+    image.addEventListener('click', openPhoto);
+  });
+
+
+
+
+
+
 }
 form.addEventListener('submit', formCard);
 
@@ -190,3 +236,26 @@ const btnactive = (evt) => {
 btnlike.forEach(button => {
   button.addEventListener('click', btnactive);
 });
+
+
+// Попап открытия карточек на весь экран
+
+// const popupCardFullscreen = document.querySelector('.popup_cardfullscreen');
+// const cardPhoto = document.querySelectorAll('.places__photo');
+
+// cardPhotoFullscreen.addEventListener('click', openPhoto);
+const openPhoto = (evt) => {
+  evt.target.classList.add('popup_opened');
+
+  console.log('test');
+  const templateCards = document.querySelector('#template-cards').content;
+  //Клонируем элемент со всем содержимым
+  const cardsElement = templateCards.querySelector('.places__element').cloneNode(true);
+  console.log(cardsElement.querySelector('.places__card-name').textContent);
+
+}
+
+const cardPhoto = document.querySelectorAll('.places__photo');
+  cardPhoto.forEach(image => {
+    image.addEventListener('click', openPhoto);
+  });
