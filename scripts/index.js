@@ -39,19 +39,6 @@ arr.forEach((card) => {
   cardsElement.querySelector('.places__card-name').textContent = card.name;
   cardsElement.querySelector('.places__photo').alt = card.name;
   //Добавляем элемент на страницу
-
-
-
-
-
-
-
-
-
-
-
-
-
   placesPhotoCards.append(cardsElement);
 });
 }
@@ -115,9 +102,6 @@ function formCard (evt) {
   cardPhoto.forEach(image => {
     image.addEventListener('click', openPhoto);
   });
-
-
-
 
 
 
@@ -238,24 +222,72 @@ btnlike.forEach(button => {
 });
 
 
-// Попап открытия карточек на весь экран
+// // Попап открытия карточек на весь экран
+// const popupCardFullscreen = document.querySelector('.popup_cardfullscreen');
+// const imageCardClick = document.querySelector('.places__photo');
+// const imageTitle = document.querySelector('.places__card-name');
+// const popupImage = popupCardFullscreen.querySelector('.popup__card-photo');
+// console.log(popupCardFullscreen);
+// console.log(imageCardClick);
+// console.log(imageCardClick.src);
+// console.log(imageTitle);
+
+// imageCardClick.addEventListener('click', function (evt) {
+//   popupCardFullscreen.classList.add('popup_opened');
+//   const eventTargetCard = evt.target;
+//   console.log(eventTargetCard);
+//   eventTargetCard.src = popupImage.src;
+//   console.log(popupImage.src);
+//   console.log(imageCardClick.src);
+
+// });
+
+
 
 // const popupCardFullscreen = document.querySelector('.popup_cardfullscreen');
+
+// const imageTitle = document.querySelector('.places__card-name');
+// const popupImage = popupCardFullscreen.querySelector('.popup__card-photo');
+// // console.log(popupCardFullscreen);
+// // console.log(imageCardClick);
+// // console.log(imageCardClick.src);
+// // console.log(imageTitle);
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Попап открытия карточек на весь экран
+
+const popupCardFullscreen = document.querySelector('.popup_cardfullscreen');
 // const cardPhoto = document.querySelectorAll('.places__photo');
-
 // cardPhotoFullscreen.addEventListener('click', openPhoto);
-const openPhoto = (evt) => {
-  evt.target.classList.add('popup_opened');
 
-  console.log('test');
-  const templateCards = document.querySelector('#template-cards').content;
-  //Клонируем элемент со всем содержимым
-  const cardsElement = templateCards.querySelector('.places__element').cloneNode(true);
-  console.log(cardsElement.querySelector('.places__card-name').textContent);
 
-}
+//const openPhoto = (evt) => {
+//  evt.target.classList.add('popup_opened');
+
+//  console.log('test');
+function openPhoto(evt) {
+  const currentImage = evt.target;
+  // const cardsEl = document.querySelector('.places__element');
+  popupCardFullscreen.classList.add('popup_opened');
+  popupCardFullscreen.querySelector('.popup__card-photo').src = currentImage.src;
+  popupCardFullscreen.querySelector('.popup__card-location').textContent = currentImage.alt;
+
+
+};
 
 const cardPhoto = document.querySelectorAll('.places__photo');
-  cardPhoto.forEach(image => {
+  cardPhoto.forEach((image) => {
     image.addEventListener('click', openPhoto);
   });
+

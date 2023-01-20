@@ -15,7 +15,7 @@
 }
 
 .popup__card-photo {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 75vW;
+  max-height: 75vh;
   object-fit: contain;
 }
