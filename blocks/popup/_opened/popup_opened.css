@@ -2,4 +2,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s, opacity .25s linear;
 }
+
+
