@@ -25,13 +25,15 @@
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/popup/__container-photo/popup__container-photo.css);
 @import url(../blocks/popup/__button-close/popup__button-close.css);
 @import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__card-photo/popup__card-photo.css);
+@import url(../blocks/popup/__card-location/popup__card-location.css);
+@import url(../blocks/popup/_card-fullscreen/popup_card-fullscreen.css);
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__input-container/form__input-container.css);
 @import url(../blocks/form/__item/form__item.css);
 @import url(../blocks/form/__submit/form__submit.css);
 @import url(../blocks/form/__title/form__title.css);
 
-
-@import url(../blocks/popup/__container-photo/popup__container-photo.css);

@@ -10,12 +10,5 @@
       padding: 25px 22px;
     }
   } */
-.popup_cardfullscreen {
-  background-color: rgba(0, 0, 0, 0.9);
-}
 
-.popup__card-photo {
-  max-width: 75vW;
-  max-height: 75vh;
-  object-fit: contain;
-}
+

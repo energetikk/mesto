@@ -26,6 +26,7 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+
 function startCards(arr) {
 arr.forEach((card) => {
   // Выбираем элемент куда будем вставлять
@@ -44,29 +45,16 @@ arr.forEach((card) => {
 }
 startCards(initialCards);
 
-
-
-
-
-
-
-
 // Добавление карточки пользователями
   // Находим форму в DOM
-  const form = document.querySelector('.popup_addprofile');
-  // Находим поля формы в DOM
-  const newCard = form.querySelector('.popup__container_form');
-  // Находим поля формы в DOM
-
-
+const form = document.querySelector('.popup_addprofile');
+// Находим поля формы в DOM
+const newCard = form.querySelector('.popup__container_form');
+// Находим поля формы в DOM
 function formCard (evt) {
   evt.preventDefault();
-
   const nameInputForm = newCard.querySelector('.form__item_place_name');
   const linkInputForm = newCard.querySelector('.form__item_place_link');
-  console.log(nameInputForm.value);
-  console.log(linkInputForm.value);
-
   // Выбираем элемент куда будем вставлять
   const placesPhotoCards = document.querySelector('.places__photo-cards');
   //Помещаем элемент из шаблона в переменную
@@ -139,20 +127,6 @@ popupClose.forEach(buttonclose => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 let profileAddButton = document.querySelector('.profile__addbutton');
 let popupaddprofile = document.querySelector('.popup_addprofile');
 let popupAddPfofileClose = profileAddButton.querySelector('.popup__button-close');
@@ -220,50 +194,6 @@ const btnactive = (evt) => {
 btnlike.forEach(button => {
   button.addEventListener('click', btnactive);
 });
-
-
-// // Попап открытия карточек на весь экран
-// const popupCardFullscreen = document.querySelector('.popup_cardfullscreen');
-// const imageCardClick = document.querySelector('.places__photo');
-// const imageTitle = document.querySelector('.places__card-name');
-// const popupImage = popupCardFullscreen.querySelector('.popup__card-photo');
-// console.log(popupCardFullscreen);
-// console.log(imageCardClick);
-// console.log(imageCardClick.src);
-// console.log(imageTitle);
-
-// imageCardClick.addEventListener('click', function (evt) {
-//   popupCardFullscreen.classList.add('popup_opened');
-//   const eventTargetCard = evt.target;
-//   console.log(eventTargetCard);
-//   eventTargetCard.src = popupImage.src;
-//   console.log(popupImage.src);
-//   console.log(imageCardClick.src);
-
-// });
-
-
-
-// const popupCardFullscreen = document.querySelector('.popup_cardfullscreen');
-
-// const imageTitle = document.querySelector('.places__card-name');
-// const popupImage = popupCardFullscreen.querySelector('.popup__card-photo');
-// // console.log(popupCardFullscreen);
-// // console.log(imageCardClick);
-// // console.log(imageCardClick.src);
-// // console.log(imageTitle);
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Попап открытия карточек на весь экран
 
