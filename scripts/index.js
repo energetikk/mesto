@@ -59,60 +59,44 @@ function formCard (evt) {
   const placesPhotoCards = document.querySelector('.places__photo-cards');
   //Помещаем элемент из шаблона в переменную
   const templateCards = document.querySelector('#template-cards').content;
-
-
   const cardsElement = templateCards.querySelector('.places__element').cloneNode(true);
   cardsElement.querySelector('.places__photo').src = `${linkInputForm.value}`;
   cardsElement.querySelector('.places__card-name').textContent = nameInputForm.value;
   cardsElement.querySelector('.places__photo').alt = nameInputForm.value;
-
-  // return initialCards.unshift({name: nameInputForm.value, link:`${linkInputForm.value}`});
-// слушатель события Submit отправки формы новой карточки
+  // слушатель события Submit отправки формы новой карточки
   placesPhotoCards.prepend(cardsElement);
   const popupprofileclose = document.querySelector('.popup_addprofile');
   popupprofileclose.classList.remove('popup_opened');
-
-
-
-  const btnlike = document.querySelectorAll('.places__button-like');
-  btnlike.forEach(button => {
+  const btnLikes = document.querySelectorAll('.places__button-like');
+  btnLikes.forEach(button => {
     button.addEventListener('click', btnactive);
   });
-
-
-  const deleteButton = document.querySelectorAll('.places__card-delete');
-  deleteButton.forEach(deleteBtn => {
+  const deleteButtons = document.querySelectorAll('.places__card-delete');
+  deleteButtons.forEach(deleteBtn => {
     deleteBtn.addEventListener('click', deletecard);
   });
-
-
-  const cardPhoto = document.querySelectorAll('.places__photo');
-  cardPhoto.forEach(image => {
+  const carsdPhoto = document.querySelectorAll('.places__photo');
+  cardsPhoto.forEach(image => {
     image.addEventListener('click', openPhoto);
   });
-
-
-
 }
 form.addEventListener('submit', formCard);
 
 // Удаление карточек
-const deleteButton = document.querySelectorAll('.places__card-delete');
+const deleteButtons = document.querySelectorAll('.places__card-delete');
 const deletecard = (evt) => {
   const delCard = evt.target.closest('.places__element');
   delCard.remove('places__card-delete');
-}
+};
 
-deleteButton.forEach(deleteBtn => {
+deleteButtons.forEach(deleteBtn => {
   deleteBtn.addEventListener('click', deletecard);
 });
 
+const editProfile = document.querySelector('.profile__edit-button');
+const popup = document.querySelector('.popup');
 
-
-let editProfile = document.querySelector('.profile__edit-button');
-let popup = document.querySelector('.popup');
-
-// Закрытие поппапов
+// Закрытие попапов
 const popupClose = document.querySelectorAll('.popup__button-close');
 function closepopup(popup) {
   popup.classList.remove('popup_opened');
@@ -125,25 +109,15 @@ popupClose.forEach(buttonclose => {
 })
 });
 
-
-
-let profileAddButton = document.querySelector('.profile__addbutton');
-let popupaddprofile = document.querySelector('.popup_addprofile');
-let popupAddPfofileClose = profileAddButton.querySelector('.popup__button-close');
+const profileAddButton = document.querySelector('.profile__addbutton');
+const popupaddprofile = document.querySelector('.popup_addprofile');
+const popupAddPfofileClose = profileAddButton.querySelector('.popup__button-close');
 
 //Попап добавления профиля
 function addProfile() {
   popupaddprofile.classList.add('popup_opened');
 }
 profileAddButton.addEventListener('click', addProfile);
-
-// Закрытие попапа добавления профиля
-
-// function closepopup() {
-//   popup.classList.remove('popup_opened');
-// }
-
-
 
 function editButton() {
   popup.classList.add('popup_opened');
@@ -153,25 +127,23 @@ function editButton() {
 
 editProfile.addEventListener('click', editButton);
 // Находим форму в DOM
-let formElement = popup.querySelector('.popup__container');
+const formElement = popup.querySelector('.popup__container');
 // Находим поля формы в DOM
-let nameInput = formElement.querySelector('.form__item_el_name');
-let jobInput = formElement.querySelector('.form__item_el_job');
-console.log(nameInput.value);
-console.log(jobInput.textContent);
+const nameInput = formElement.querySelector('.form__item_el_name');
+const jobInput = formElement.querySelector('.form__item_el_job');
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 
-let profileName = document.querySelector('.profile__name');
-let profileJob = document.querySelector('.profile__job');
+const profileName = document.querySelector('.profile__name');
+const profileJob = document.querySelector('.profile__job');
 console.log(profileJob);
 console.log(profileName);
 
 function handleFormSubmit (evt) {
   evt.preventDefault();
   // Выберите элементы, куда должны быть вставлены значения полей
-  let profileName = document.querySelector('.profile__name');
-  let profileJob = document.querySelector('.profile__job');
+  const profileName = document.querySelector('.profile__name');
+  const profileJob = document.querySelector('.profile__job');
   console.log(profileJob);
   // Вставьте новые значения с помощью textContent
   profileName.textContent = nameInput.value;
@@ -182,42 +154,29 @@ function handleFormSubmit (evt) {
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', handleFormSubmit);
-// popupClose.addEventListener('click', closepopup);
 
 
 // выберем кнопку лайка
-const btnlike = document.querySelectorAll('.places__button-like');
+const btnlikes = document.querySelectorAll('.places__button-like');
 
 const btnactive = (evt) => {
   evt.target.classList.toggle('places__button-like_active');
 }
-btnlike.forEach(button => {
+btnlikes.forEach(button => {
   button.addEventListener('click', btnactive);
 });
 
 // Попап открытия карточек на весь экран
-
 const popupCardFullscreen = document.querySelector('.popup_cardfullscreen');
-// const cardPhoto = document.querySelectorAll('.places__photo');
-// cardPhotoFullscreen.addEventListener('click', openPhoto);
-
-
-//const openPhoto = (evt) => {
-//  evt.target.classList.add('popup_opened');
-
-//  console.log('test');
 function openPhoto(evt) {
   const currentImage = evt.target;
-  // const cardsEl = document.querySelector('.places__element');
   popupCardFullscreen.classList.add('popup_opened');
   popupCardFullscreen.querySelector('.popup__card-photo').src = currentImage.src;
   popupCardFullscreen.querySelector('.popup__card-location').textContent = currentImage.alt;
-
-
 };
 
-const cardPhoto = document.querySelectorAll('.places__photo');
-  cardPhoto.forEach((image) => {
+const cardsPhoto = document.querySelectorAll('.places__photo');
+  cardsPhoto.forEach((image) => {
     image.addEventListener('click', openPhoto);
   });
 
