@@ -98,24 +98,24 @@ const popup = document.querySelector('.popup');
 
 // Закрытие попапов
 const popupClose = document.querySelectorAll('.popup__button-close');
-function closepopup(popup) {
+function closePopup(popup) {
   popup.classList.remove('popup_opened');
 };
 
 popupClose.forEach(buttonclose => {
   buttonclose.addEventListener('click', function (evt) {
     const btnClose = evt.target.closest('.popup');
-    closepopup(btnClose);
+    closePopup(btnClose);
 })
 });
 
 const profileAddButton = document.querySelector('.profile__addbutton');
-const popupaddprofile = document.querySelector('.popup_addprofile');
+const popupAddProfile = document.querySelector('.popup_addprofile');
 const popupAddPfofileClose = profileAddButton.querySelector('.popup__button-close');
 
 //Попап добавления профиля
 function addProfile() {
-  popupaddprofile.classList.add('popup_opened');
+  popupAddProfile.classList.add('popup_opened');
 }
 profileAddButton.addEventListener('click', addProfile);
 
@@ -157,12 +157,12 @@ formElement.addEventListener('submit', handleFormSubmit);
 
 
 // выберем кнопку лайка
-const btnlikes = document.querySelectorAll('.places__button-like');
+const btnLikes = document.querySelectorAll('.places__button-like');
 
 const btnactive = (evt) => {
   evt.target.classList.toggle('places__button-like_active');
 }
-btnlikes.forEach(button => {
+btnLikes.forEach(button => {
   button.addEventListener('click', btnactive);
 });
 
