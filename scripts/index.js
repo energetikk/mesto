@@ -34,35 +34,34 @@ const placesPhotoCards = document.querySelector('.places__photo-cards');
 const templateCards = document.querySelector('#template-cards').content;
 
 const popupCardFullscreen = document.querySelector('.popup_cardfullscreen');
-const btnLike = document.querySelector('.places__button-like');
+
 
 const createCard = (card) => {
   const cardsElement = templateCards.querySelector('.places__element').cloneNode(true);
   cardsElement.querySelector('.places__photo').src = card.link;
-  // console.log(cardsElement.querySelector('.places__photo').src);
   cardsElement.querySelector('.places__card-name').textContent = card.name;
   cardsElement.querySelector('.places__photo').alt = card.name;
   console.log(cardsElement);
 
+  const btnLike = cardsElement.querySelector('.places__button-like');
+  btnLike.addEventListener('click', (evt) => {
+    btnLike.classList.toggle('places__button-like_active')
+  });
 
-  btnLike.addEventListener('click', addLike());
-  // const btnLike = document.querySelector('.places__button-like');
-  // btnLike.addEventListener('click', () => {
-  //   btnLike.classList.toggle('places__button-like_active')
-  // });
+  const deleteButton = cardsElement.querySelector('.places__card-delete');
+  deleteButton.addEventListener('click', (evt) => {
+      const delCard = evt.target.closest('.places__element');
+      delCard.remove('places__card-delete');
 
-  // const deleteButton = document.querySelector('.places__card-delete');
-  // deleteButton.addEventListener('click', () => {
-  //   cardsElement.classList.remove();
-  // });
+  });
 
-  // const cardsdPhoto = document.querySelector('.places__photo');
-  // cardsdPhoto.addEventListener('click', (evt) => {
-  // const currentImage = evt.target;
-  // popupCardFullscreen.classList.add('popup_opened');
-  // popupCardFullscreen.querySelector('.popup__card-photo').src = currentImage.src;
-  // popupCardFullscreen.querySelector('.popup__card-location').textContent = currentImage.alt;
-  // });
+  const cardsdPhoto = cardsElement.querySelector('.places__photo');
+  cardsdPhoto.addEventListener('click', (evt) => {
+  const currentImage = evt.target;
+  popupCardFullscreen.classList.add('popup_opened');
+  popupCardFullscreen.querySelector('.popup__card-photo').src = currentImage.src;
+  popupCardFullscreen.querySelector('.popup__card-location').textContent = currentImage.alt;
+  });
 
   return cardsElement;
 };
@@ -76,99 +75,54 @@ initialCards.forEach((item) => {
 });
 
 
-
-
-
-
-const addLike = () => {
-  btnLike.classList.toggle('places__button-like_active')
-}
-
-  const deleteButton = document.querySelector('.places__card-delete');
-  deleteButton.addEventListener('click', () => {
-    cardsElement.classList.remove();
-  });
-
-  const cardsdPhoto = document.querySelector('.places__photo');
-  cardsdPhoto.addEventListener('click', (evt) => {
-  const currentImage = evt.target;
-  popupCardFullscreen.classList.add('popup_opened');
-  popupCardFullscreen.querySelector('.popup__card-photo').src = currentImage.src;
-  popupCardFullscreen.querySelector('.popup__card-location').textContent = currentImage.alt;
-  });
-
-
-
-
-
-
-
-
-
-//   return cardsElement;
-// };
-
-// function startCards(arr) {
-  // arr.forEach((card) => {
-
-  //Клонируем элемент со всем содержимым
-
-  //Вставляем значения из массива в новый элемент
-
-//   //Добавляем элемент на страницу
-//   placesPhotoCards.append(cardsElement);
-// });
-// }
-// startCards(initialCards);
-
 // Добавление карточки пользователями
   // Находим форму в DOM
 const form = document.querySelector('.popup_addprofile');
 // Находим поля формы в DOM
 const newCard = form.querySelector('.popup__container_form');
-// Находим поля формы в DOM
-// function formCard (evt) {
-//   evt.preventDefault();
-//   const nameInputForm = newCard.querySelector('.form__item_place_name');
-//   const linkInputForm = newCard.querySelector('.form__item_place_link');
-//   // Выбираем элемент куда будем вставлять
-//   const placesPhotoCards = document.querySelector('.places__photo-cards');
-//   //Помещаем элемент из шаблона в переменную
-//   const templateCards = document.querySelector('#template-cards').content;
-//   const cardsElement = templateCards.querySelector('.places__element').cloneNode(true);
-//   cardsElement.querySelector('.places__photo').src = `${linkInputForm.value}`;
-//   cardsElement.querySelector('.places__card-name').textContent = nameInputForm.value;
-//   cardsElement.querySelector('.places__photo').alt = nameInputForm.value;
-//   // слушатель события Submit отправки формы новой карточки
-//   placesPhotoCards.prepend(cardsElement);
-//   const popupprofileclose = document.querySelector('.popup_addprofile');
-//   popupprofileclose.classList.remove('popup_opened');
-//   const btnLikes = document.querySelectorAll('.places__button-like');
-//   btnLikes.forEach(button => {
-//     button.addEventListener('click', btnactive);
-//   });
-//   const deleteButtons = document.querySelectorAll('.places__card-delete');
-//   deleteButtons.forEach(deleteBtn => {
-//     deleteBtn.addEventListener('click', deletecard);
-//   });
-//   const cardsdPhoto = document.querySelectorAll('.places__photo');
-//   cardsPhoto.forEach(image => {
-//     image.addEventListener('click', openPhoto);
-//   });
-// }
-// form.addEventListener('submit', formCard);
+//Находим поля формы в DOM
+function formCard (evt) {
+  evt.preventDefault();
+  const nameInputForm = newCard.querySelector('.form__item_place_name');
+  const linkInputForm = newCard.querySelector('.form__item_place_link');
+  // Выбираем элемент куда будем вставлять
+  const placesPhotoCards = document.querySelector('.places__photo-cards');
+  //Помещаем элемент из шаблона в переменную
+  const templateCards = document.querySelector('#template-cards').content;
+  const cardsElement = templateCards.querySelector('.places__element').cloneNode(true);
+  cardsElement.querySelector('.places__photo').src = `${linkInputForm.value}`;
+  cardsElement.querySelector('.places__card-name').textContent = nameInputForm.value;
+  cardsElement.querySelector('.places__photo').alt = nameInputForm.value;
+  // слушатель события Submit отправки формы новой карточки
+  placesPhotoCards.prepend(cardsElement);
+  const popupprofileclose = document.querySelector('.popup_addprofile');
+  popupprofileclose.classList.remove('popup_opened');
+  const btnLikes = document.querySelectorAll('.places__button-like');
+  btnLikes.forEach(button => {
+    button.addEventListener('click', btnactive);
+  });
+  const deleteButtons = document.querySelectorAll('.places__card-delete');
+  deleteButtons.forEach(deleteBtn => {
+    deleteBtn.addEventListener('click', deletecard);
+  });
+  const cardsdPhoto = document.querySelectorAll('.places__photo');
+  cardsPhoto.forEach(image => {
+    image.addEventListener('click', openPhoto);
+  });
+}
+form.addEventListener('submit', formCard);
 
-// Удаление карточек
-// const deleteButtons = document.querySelectorAll('.places__card-delete');
-// const deletecard = (evt) => {
-//   const delCard = evt.target.closest('.places__element');
-//   delCard.remove('places__card-delete');
-// };
+//Удаление карточек
+const deleteButtons = document.querySelectorAll('.places__card-delete');
+const deletecard = (evt) => {
+  const delCard = evt.target.closest('.places__element');
+  delCard.remove('places__card-delete');
+};
 
-// deleteButtons.forEach(deleteBtn => {
-//   deleteBtn.addEventListener('click', deletecard);
-// });
-
+deleteButtons.forEach(deleteBtn => {
+  deleteBtn.addEventListener('click', deletecard);
+});
+///////////////////////////////////////////////////////////
 const editProfile = document.querySelector('.profile__edit-button');
 const popup = document.querySelector('.popup');
 
