@@ -34,7 +34,7 @@ const placesPhotoCards = document.querySelector('.places__photo-cards');
 const templateCards = document.querySelector('#template-cards').content;
 
 const popupCardFullscreen = document.querySelector('.popup_cardfullscreen');
-
+const btnLike = document.querySelector('.places__button-like');
 
 const createCard = (card) => {
   const cardsElement = templateCards.querySelector('.places__element').cloneNode(true);
@@ -43,6 +43,9 @@ const createCard = (card) => {
   cardsElement.querySelector('.places__card-name').textContent = card.name;
   cardsElement.querySelector('.places__photo').alt = card.name;
   console.log(cardsElement);
+
+
+  btnLike.addEventListener('click', addLike());
   // const btnLike = document.querySelector('.places__button-like');
   // btnLike.addEventListener('click', () => {
   //   btnLike.classList.toggle('places__button-like_active')
@@ -69,9 +72,35 @@ const renderCard = (card) => {
 }
 
 initialCards.forEach((item) => {
-  createCard(item);
-  // console.log(item);
+  renderCard(item);
 });
+
+
+
+
+
+
+const addLike = () => {
+  btnLike.classList.toggle('places__button-like_active')
+}
+
+  const deleteButton = document.querySelector('.places__card-delete');
+  deleteButton.addEventListener('click', () => {
+    cardsElement.classList.remove();
+  });
+
+  const cardsdPhoto = document.querySelector('.places__photo');
+  cardsdPhoto.addEventListener('click', (evt) => {
+  const currentImage = evt.target;
+  popupCardFullscreen.classList.add('popup_opened');
+  popupCardFullscreen.querySelector('.popup__card-photo').src = currentImage.src;
+  popupCardFullscreen.querySelector('.popup__card-location').textContent = currentImage.alt;
+  });
+
+
+
+
+
 
 
 
