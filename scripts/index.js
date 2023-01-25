@@ -1,5 +1,4 @@
 //Добавление первых 6 карточек на страницу
-
 const initialCards = [
   {
     name: 'Архыз',
@@ -28,7 +27,6 @@ const initialCards = [
 ];
 
 //Находим и создаем элементы
-
 const placesPhotoCards = document.querySelector('.places__photo-cards');
 const templateCards = document.querySelector('#template-cards').content;
 const popupCardFullscreen = document.querySelector('.popup_cardfullscreen');
@@ -45,6 +43,8 @@ const nameInput = formElement.querySelector('.form__item_el_name');
 const jobInput = formElement.querySelector('.form__item_el_job');
 const editProfile = document.querySelector('.profile__edit-button');
 const popupCloseBtns = document.querySelectorAll('.popup__button-close');
+const locationCardFullscreen = popupCardFullscreen.querySelector('.popup__card-location');
+const photoCardFullscreen = popupCardFullscreen.querySelector('.popup__card-photo');
 
 //Универсальная функция создания карточек
 const createCard = (card) => {
@@ -67,14 +67,15 @@ const createCard = (card) => {
   const cardsdPhoto = cardsElement.querySelector('.places__photo');
   cardsdPhoto.addEventListener('click', (evt) => {
   const currentImage = evt.target;
-  popupCardFullscreen.classList.add('popup_opened');
-  popupCardFullscreen.querySelector('.popup__card-photo').src = currentImage.src;
-  popupCardFullscreen.querySelector('.popup__card-location').textContent = currentImage.alt;
+  openPopup(popupCardFullscreen);
+  photoCardFullscreen.src = currentImage.src;
+  photoCardFullscreen.alt = currentImage.alt;
+  locationCardFullscreen.textContent = currentImage.alt;
   });
-
   return cardsElement;
 };
 
+//Функция отрисовки карточек на странице
 const renderCard = (card) => {
   placesPhotoCards.prepend(createCard(card));
 }
@@ -91,7 +92,6 @@ function addCard (evt) {
   evt.target.reset();
   closePopup(popupAddProfile);
 };
-
 popupAddProfile.addEventListener('submit', addCard);
 
 // Универсальная функция закрытия попапов
@@ -105,7 +105,6 @@ function openPopup(popup) {
 };
 
 //Закрытие попапов по крестику
-
 popupCloseBtns.forEach(buttonclose => {
   buttonclose.addEventListener('click', function (evt) {
     const btnClose = evt.target.closest('.popup');
@@ -117,7 +116,6 @@ popupCloseBtns.forEach(buttonclose => {
 function addProfile() {
   openPopup(popupAddProfile);
 };
-
 profileAddButton.addEventListener('click', addProfile);
 
 //Редактирование профиля
@@ -126,16 +124,12 @@ function editButton() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 };
-
 editProfile.addEventListener('click', editButton);
 
 function handleFormSubmit (evt) {
   evt.preventDefault();
-  const profileName = document.querySelector('.profile__name');
-  const profileJob = document.querySelector('.profile__job');
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
   closePopup(openPopupEditProfile);
 };
-
 formElement.addEventListener('submit', handleFormSubmit);
