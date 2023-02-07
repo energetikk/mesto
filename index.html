@@ -43,8 +43,8 @@
       <form name="info" class="form">
         <h2 class="form__title">Редактировать профиль</h2>
         <fieldset class="form__input-container">
-          <input type="text" name="name" class="form__item form__item_el_name">
-          <input type="text" name="name" class="form__item form__item_el_job">
+          <input required minlength="2" type="text" name="name" class="form__item form__item_el_name">
+          <input required type="text" name="name" class="form__item form__item_el_job">
         </fieldset>
         <button type="submit" class="form__submit">Сохранить</button>
       </form>
@@ -93,6 +93,7 @@
   </template>
 
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validation.js"></script>
 </body>
 
 </html>

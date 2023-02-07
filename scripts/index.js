@@ -133,3 +133,32 @@ function handleFormSubmit (evt) {
   closePopup(openPopupEditProfile);
 };
 formElement.addEventListener('submit', handleFormSubmit);
+console.log(initialCards);
+
+
+
+
+
+///////////////Закрытие попапов по оверлею
+
+document.body.addEventListener('click', function (evt) {
+  if (evt.target.classList.contains('popup_opened')) {
+     closePopup(evt.target);
+  };
+  });
+
+///// Закрытие попапов по кнопке эскейп
+
+const popupescape = document.querySelectorAll('.popup');
+
+function closeByEsc(popupescape) {
+    popupescape.forEach((item) => {
+    document.addEventListener('keydown', function (evt) {
+    if (evt.key === "Escape" && item.classList.contains('popup_opened')) {
+      closePopup(item);
+    };
+  });
+  });
+  };
+
+  closeByEsc(popupescape);
