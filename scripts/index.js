@@ -135,12 +135,7 @@ function handleFormSubmit (evt) {
 formElement.addEventListener('submit', handleFormSubmit);
 console.log(initialCards);
 
-
-
-
-
 ///////////////Закрытие попапов по оверлею
-
 document.body.addEventListener('click', function (evt) {
   if (evt.target.classList.contains('popup_opened')) {
      closePopup(evt.target);
@@ -148,7 +143,6 @@ document.body.addEventListener('click', function (evt) {
   });
 
 ///// Закрытие попапов по кнопке эскейп
-
 const popupescape = document.querySelectorAll('.popup');
 
 function closeByEsc(popupescape) {

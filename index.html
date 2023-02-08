@@ -43,8 +43,10 @@
       <form name="info" class="form" novalidate>
         <h2 class="form__title">Редактировать профиль</h2>
         <fieldset class="form__input-container">
-          <input required minlength="2" maxlength="40" type="text" name="name" class="form__item form__item_el_name">
-          <input required minlength="2" maxlength="200" type="text" name="name" class="form__item form__item_el_job">
+          <input id="input-name" required minlength="2" maxlength="40" type="text" name="name" class="form__item form__item_el_name">
+          <span id="input-name-error" class="popup__error"></span>
+          <input id="input-job" required minlength="2" maxlength="200" type="text" name="name" class="form__item form__item_el_job">
+          <span id="input-job-error" class="popup__error"></span>
         </fieldset>
         <button type="submit" class="form__submit">Сохранить</button>
       </form>
@@ -58,8 +60,10 @@
       <form name="info" class="form" novalidate>
         <h2 class="form__title">Новое место</h2>
         <fieldset class="form__input-container">
-          <input type="text" required minlength="2" maxlength="30" name="name" placeholder="Название" class="form__item form__item_place_name">
-          <input type="url" required name="name" placeholder="Ссылка на картинку" class="form__item form__item_place_link">
+          <input id="input-newplace" type="text" required minlength="2" maxlength="30" name="name" placeholder="Название" class="form__item form__item_place_name">
+          <span id="input-newplace-error" class="popup__error"></span>
+          <input id="input-link" type="url" required name="name" placeholder="Ссылка на картинку" class="form__item form__item_place_link">
+          <span id="input-link-error" class="popup__error"></span>
         </fieldset>
         <button type="submit" class="form__submit">Создать</button>
       </form>
