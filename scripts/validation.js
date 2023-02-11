@@ -20,6 +20,10 @@ function enableValidation (config) {
   form.addEventListener('input', (evt) => {
     toggleButton(form, config);
   });
+  form.addEventListener('reset', () => { // собыите `reset` происходит когда вызывается `reset` у формы
+    setTimeout(() => {  // добавим таймаут, чтобы `toggleButtonState` вызвался уже после сохранения формы
+      toggleButtonState(inputList, buttonElement, settings), 0 })
+  })
 });
 };
 

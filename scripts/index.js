@@ -31,6 +31,7 @@ const placesPhotoCards = document.querySelector('.places__photo-cards');
 const templateCards = document.querySelector('#template-cards').content;
 const popupCardFullscreen = document.querySelector('.popup_cardfullscreen');
 const popupAddProfile = document.querySelector('.popup_addprofile');
+const popupSubmitButton = popupAddProfile.querySelector('.form__submit');
 const nameInputForm = popupAddProfile.querySelector('.form__item_place_name');
 const linkInputForm = popupAddProfile.querySelector('.form__item_place_link');
 const profileName = document.querySelector('.profile__name');
@@ -117,8 +118,8 @@ popupCloseBtns.forEach(buttonclose => {
 //Попап добавления профиля
 function addProfile() {
   openPopup(popupAddProfile);
-  popupAddProfile.querySelector('.form__submit').disabled = true;
-  popupAddProfile.querySelector('.form__submit').classList.add('form__submit_disabled');
+  popupSubmitButton.disabled = true;
+  popupSubmitButton.classList.add('form__submit_disabled');
 };
 profileAddButton.addEventListener('click', addProfile);
 
