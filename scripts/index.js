@@ -47,53 +47,147 @@ const popupCloseBtns = document.querySelectorAll('.popup__button-close');
 const locationCardFullscreen = popupCardFullscreen.querySelector('.popup__card-location');
 const photoCardFullscreen = popupCardFullscreen.querySelector('.popup__card-photo');
 
-//Универсальная функция создания карточек
-const createCard = (card) => {
-  const cardsElement = templateCards.querySelector('.places__element').cloneNode(true);
-  cardsElement.querySelector('.places__photo').src = card.link;
-  cardsElement.querySelector('.places__card-name').textContent = card.name;
-  cardsElement.querySelector('.places__photo').alt = card.name;
+/////////////////////////////////////////
 
-  const btnLike = cardsElement.querySelector('.places__button-like');
-  btnLike.addEventListener('click', (evt) => {
-    btnLike.classList.toggle('places__button-like_active')
-  });
+class Card {
+  constructor(data, templateSelector) {
+    this._name = data.name;
+    this._link = data.link;
+    this._templateSelector = templateSelector;
 
-  const deleteButton = cardsElement.querySelector('.places__card-delete');
-  deleteButton.addEventListener('click', (evt) => {
-    const delCard = evt.target.closest('.places__element');
-    delCard.remove('places__card-delete');
-  });
+  }
 
-  const cardsdPhoto = cardsElement.querySelector('.places__photo');
-  cardsdPhoto.addEventListener('click', (evt) => {
-  const currentImage = evt.target;
-  openPopup(popupCardFullscreen);
-  photoCardFullscreen.src = currentImage.src;
-  photoCardFullscreen.alt = currentImage.alt;
-  locationCardFullscreen.textContent = currentImage.alt;
-  });
-  return cardsElement;
-};
+  _getTemplate() {
+    const cardsElement = document
+    .querySelector(this._templateSelector)
+    .content
+    .querySelector('.places__element')
+    .cloneNode(true);
 
-//Функция отрисовки карточек на странице
-const renderCard = (card) => {
-  placesPhotoCards.prepend(createCard(card));
+    return cardsElement;
+  }
+
+  generateCard() {
+    this._element = this._getTemplate();
+    this._element.querySelector('.places__photo').src = this._link;
+    this._element.querySelector('.places__card-name').textContent = this._name;
+    this._element.querySelector('.places__photo').alt = this._name;
+    this._setEventListeners();
+
+    return this._element;
+  }
+
+  _handleLikeClick() {
+    this._element.querySelector('.places__button-like').classList.toggle('places__button-like_active');
 }
 
+  _setEventListeners() {
+    this._element.querySelector('.places__button-like').addEventListener('click', () => {
+        this._handleLikeClick();
+    });
+    this._element.querySelector('.places__card-delete').addEventListener('click', () => {
+      this._handleDeleteCardClick();
+    });
+
+    this._element.querySelector('.places__photo').addEventListener('click', () => {
+    this._openFullScreenImage();
+    });
+
+  }
+
+  _handleDeleteCardClick() {
+    const delCard = this._element.closest('.places__element')
+    delCard.remove('places__card-delete');
+
+}
+  _openFullScreenImage() {
+  photoCardFullscreen.src = this._link;
+  photoCardFullscreen.alt = this._name;
+  locationCardFullscreen.textContent = this._name;
+  openPopup(popupCardFullscreen);
+  }
+}
+
+
 initialCards.forEach((item) => {
-  renderCard(item);
+  const card = new Card(item, '#template-cards');
+  const cardElement = card.generateCard();
+  placesPhotoCards.prepend(cardElement);
 });
 
-// Добавление карточки пользователями
-function addCard (evt) {
-  evt.preventDefault();
-  const createNewCard = {name: nameInputForm.value, link: linkInputForm.value};
-  renderCard(createNewCard);
-  evt.target.reset();
+
+
+
+// function createNewCard() {
+
+//   const userCardElement = userCard.generateCard();
+//   placesPhotoCards.prepend(userCardElement);
+
+//   closePopup(popupAddProfile);
+// }
+
+popupAddProfile.addEventListener('submit', () => {
+  const newCard = {name: nameInputForm.value, link: linkInputForm.value};
+  const userCard = new Card(newCard, '#template-cards');
+  const userCardElement = userCard.generateCard();
+  placesPhotoCards.prepend(userCardElement);
   closePopup(popupAddProfile);
-};
-popupAddProfile.addEventListener('submit', addCard);
+});
+
+
+
+
+
+
+////////////////////////////////////////
+
+// //Универсальная функция создания карточек
+// const createCard = (card) => {
+//   const cardsElement = templateCards.querySelector('.places__element').cloneNode(true);
+//   cardsElement.querySelector('.places__photo').src = card.link;
+//   cardsElement.querySelector('.places__card-name').textContent = card.name;
+//   cardsElement.querySelector('.places__photo').alt = card.name;
+
+//   const btnLike = cardsElement.querySelector('.places__button-like');
+//   btnLike.addEventListener('click', (evt) => {
+//     btnLike.classList.toggle('places__button-like_active')
+//   });
+
+//   const deleteButton = cardsElement.querySelector('.places__card-delete');
+//   deleteButton.addEventListener('click', (evt) => {
+//     const delCard = evt.target.closest('.places__element');
+//     delCard.remove('places__card-delete');
+//   });
+
+//   const cardsdPhoto = cardsElement.querySelector('.places__photo');
+//   cardsdPhoto.addEventListener('click', (evt) => {
+//   const currentImage = evt.target;
+//   openPopup(popupCardFullscreen);
+//   photoCardFullscreen.src = currentImage.src;
+//   photoCardFullscreen.alt = currentImage.alt;
+//   locationCardFullscreen.textContent = currentImage.alt;
+//   });
+//   return cardsElement;
+// };
+
+// //Функция отрисовки карточек на странице
+// const renderCard = (card) => {
+//   placesPhotoCards.prepend(createCard(card));
+// }
+
+// initialCards.forEach((item) => {
+//   renderCard(item);
+// });
+
+// // Добавление карточки пользователями
+// function addCard (evt) {
+//   evt.preventDefault();
+//   const createNewCard = {name: nameInputForm.value, link: linkInputForm.value};
+//   renderCard(createNewCard);
+//   evt.target.reset();
+//   closePopup(popupAddProfile);
+// };
+// popupAddProfile.addEventListener('submit', addCard);
 
 //Универсальная функция открытие попапов
 function openPopup(popup) {
