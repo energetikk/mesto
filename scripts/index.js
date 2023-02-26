@@ -134,8 +134,22 @@ popupAddProfile.addEventListener('submit', () => {
   closePopup(popupAddProfile);
 });
 
+// class UserCard extends Card {
+//   constructor(newCard, templateSelector) {
+//     super(data, templateSelector)
+//     this._name = newCard.name
+//     this._link = newCard.link
 
 
+//     // this._templateSelector = templateSelector
+//   }
+//   // _setEventListener() {
+//   //   popupAddProfile.addEventListener('submit', () => {
+//   //   }
+// }
+// const newCard = {name: nameInputForm.value, link: linkInputForm.value};
+// const userCard = new Card(newCard, '#template-cards');
+// const userCardElement = userCard.generateCard();
 
 
 
