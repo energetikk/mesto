@@ -47,8 +47,6 @@ const popupCloseBtns = document.querySelectorAll('.popup__button-close');
 const locationCardFullscreen = popupCardFullscreen.querySelector('.popup__card-location');
 const photoCardFullscreen = popupCardFullscreen.querySelector('.popup__card-photo');
 
-/////////////////////////////////////////
-
 class Card {
   constructor(data, templateSelector) {
     this._name = data.name;
@@ -73,7 +71,6 @@ class Card {
     this._element.querySelector('.places__card-name').textContent = this._name;
     this._element.querySelector('.places__photo').alt = this._name;
     this._setEventListeners();
-
     return this._element;
   }
 
@@ -108,23 +105,11 @@ class Card {
   }
 }
 
-
 initialCards.forEach((item) => {
   const card = new Card(item, '#template-cards');
   const cardElement = card.generateCard();
   placesPhotoCards.prepend(cardElement);
 });
-
-
-
-
-// function createNewCard() {
-
-//   const userCardElement = userCard.generateCard();
-//   placesPhotoCards.prepend(userCardElement);
-
-//   closePopup(popupAddProfile);
-// }
 
 popupAddProfile.addEventListener('submit', () => {
   const newCard = {name: nameInputForm.value, link: linkInputForm.value};
@@ -132,77 +117,8 @@ popupAddProfile.addEventListener('submit', () => {
   const userCardElement = userCard.generateCard();
   placesPhotoCards.prepend(userCardElement);
   closePopup(popupAddProfile);
-  // document.querySelector('.form_addprofile').reset();
+  document.querySelector('.form_addprofile').reset();
 });
-
-// class UserCard extends Card {
-//   constructor(newCard, templateSelector) {
-//     super(data, templateSelector)
-//     this._name = newCard.name
-//     this._link = newCard.link
-
-
-//     // this._templateSelector = templateSelector
-//   }
-//   // _setEventListener() {
-//   //   popupAddProfile.addEventListener('submit', () => {
-//   //   }
-// }
-// const newCard = {name: nameInputForm.value, link: linkInputForm.value};
-// const userCard = new Card(newCard, '#template-cards');
-// const userCardElement = userCard.generateCard();
-
-
-
-////////////////////////////////////////
-
-// //Универсальная функция создания карточек
-// const createCard = (card) => {
-//   const cardsElement = templateCards.querySelector('.places__element').cloneNode(true);
-//   cardsElement.querySelector('.places__photo').src = card.link;
-//   cardsElement.querySelector('.places__card-name').textContent = card.name;
-//   cardsElement.querySelector('.places__photo').alt = card.name;
-
-//   const btnLike = cardsElement.querySelector('.places__button-like');
-//   btnLike.addEventListener('click', (evt) => {
-//     btnLike.classList.toggle('places__button-like_active')
-//   });
-
-//   const deleteButton = cardsElement.querySelector('.places__card-delete');
-//   deleteButton.addEventListener('click', (evt) => {
-//     const delCard = evt.target.closest('.places__element');
-//     delCard.remove('places__card-delete');
-//   });
-
-//   const cardsdPhoto = cardsElement.querySelector('.places__photo');
-//   cardsdPhoto.addEventListener('click', (evt) => {
-//   const currentImage = evt.target;
-//   openPopup(popupCardFullscreen);
-//   photoCardFullscreen.src = currentImage.src;
-//   photoCardFullscreen.alt = currentImage.alt;
-//   locationCardFullscreen.textContent = currentImage.alt;
-//   });
-//   return cardsElement;
-// };
-
-// //Функция отрисовки карточек на странице
-// const renderCard = (card) => {
-//   placesPhotoCards.prepend(createCard(card));
-// }
-
-// initialCards.forEach((item) => {
-//   renderCard(item);
-// });
-
-// // Добавление карточки пользователями
-// function addCard (evt) {
-//   evt.preventDefault();
-//   const createNewCard = {name: nameInputForm.value, link: linkInputForm.value};
-//   renderCard(createNewCard);
-//   evt.target.reset();
-//   closePopup(popupAddProfile);
-// };
-// popupAddProfile.addEventListener('submit', addCard);
 
 //Универсальная функция открытие попапов
 function openPopup(popup) {
@@ -238,6 +154,7 @@ function editButton() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 };
+
 editProfile.addEventListener('click', editButton);
 
 function handleFormSubmit (evt) {
