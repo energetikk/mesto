@@ -132,6 +132,7 @@ popupAddProfile.addEventListener('submit', () => {
   const userCardElement = userCard.generateCard();
   placesPhotoCards.prepend(userCardElement);
   closePopup(popupAddProfile);
+  // document.querySelector('.form_addprofile').reset();
 });
 
 // class UserCard extends Card {

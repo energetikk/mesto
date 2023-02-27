@@ -27,14 +27,15 @@ class FormValidator {
     // console.log(formList);
     // formList.forEach(function (form) {
     this._addInputListener(this._currentFormSelector, validationConfig);
-    document.querySelector(this._currentFormSelector).addEventListener('submit', () => {
-      this.preventDefault()});
+    document.querySelector(this._currentFormSelector).addEventListener('submit', (evt) => {
+      evt.preventDefault()});
       document.querySelector(this._currentFormSelector).addEventListener('input', () => {
       this._toggleButton();
+
     });
     document.querySelector(this._currentFormSelector).addEventListener('reset', () => { // собыите `reset` происходит когда вызывается `reset` у формы
       setTimeout(() => {  // добавим таймаут, чтобы `toggleButtonState` вызвался уже после сохранения формы
-        toggleButtonState(inputList, buttonElement, settings), 0 })
+        toggleButton(inputList, buttonElement, settings), 0 })
     })
     };
 
@@ -45,8 +46,8 @@ class FormValidator {
   _addInputListener() {
 
       const inputItem = Array.from(document.querySelectorAll(this._inputSelector));
-      inputItem.forEach(function (item) {
-        item.addEventListener('input', () => {
+      inputItem.forEach(item => {
+        item.addEventListener('input', (evt) => {
           this._handleFormInput(evt);
         });
       });
@@ -57,7 +58,7 @@ class FormValidator {
       const inputTarget = evt.target;
     const errorImput = document.querySelector(`#${inputTarget.id}-error`);
     console.log(this);
-      if (!this.validity.valid) {
+      if (!inputTarget.validity.valid) {
         inputTarget.classList.add(this._inputErrorClass);
         errorImput.textContent = inputTarget.validationMessage;
         errorImput.classList.remove(this._errorClass);
@@ -69,21 +70,22 @@ class FormValidator {
 
   //Переключение кнопки Submit в завистимости от валидации
   _toggleButton() {
-    const submitButton = document.querySelector(this._submitButtonSelector);
-    console.log(submitButton);
+    this._submitButton = document.querySelector(this._currentFormSelector).querySelector(this._submitButtonSelector);
+    console.log(this._submitButton);
     console.log(this);
     const isValidForm = document.querySelector(this._currentFormSelector).checkValidity();
     console.log(isValidForm);
-    submitButton.disabled = !isValidForm;
-    submitButton.classList.toggle(this._inactiveButtonClass, !isValidForm);
+    this._submitButton.disabled = !isValidForm;
+    this._submitButton.classList.toggle(this._inactiveButtonClass, !isValidForm);
   }
 
 }
 
-const validationProfile = new FormValidator(validationConfig, 'form');
+const validationProfile = new FormValidator(validationConfig, '.form');
 validationProfile.enableValidation();
 
-
+const validationNewLocation = new FormValidator(validationConfig, '.form_addprofile');
+validationNewLocation.enableValidation();
 ///////////////////
 
 
