@@ -1,3 +1,6 @@
+import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js';
+
 //Добавление первых 6 карточек на страницу
 const initialCards = [
   {
@@ -47,70 +50,14 @@ const popupCloseBtns = document.querySelectorAll('.popup__button-close');
 const locationCardFullscreen = popupCardFullscreen.querySelector('.popup__card-location');
 const photoCardFullscreen = popupCardFullscreen.querySelector('.popup__card-photo');
 
-class Card {
-  constructor(data, templateSelector) {
-    this._name = data.name;
-    this._link = data.link;
-    this._templateSelector = templateSelector;
-
-  }
-
-  _getTemplate() {
-    const cardsElement = document
-    .querySelector(this._templateSelector)
-    .content
-    .querySelector('.places__element')
-    .cloneNode(true);
-
-    return cardsElement;
-  }
-
-  generateCard() {
-    this._element = this._getTemplate();
-    this._element.querySelector('.places__photo').src = this._link;
-    this._element.querySelector('.places__card-name').textContent = this._name;
-    this._element.querySelector('.places__photo').alt = this._name;
-    this._setEventListeners();
-    return this._element;
-  }
-
-  _handleLikeClick() {
-    this._element.querySelector('.places__button-like').classList.toggle('places__button-like_active');
-}
-
-  _setEventListeners() {
-    this._element.querySelector('.places__button-like').addEventListener('click', () => {
-        this._handleLikeClick();
-    });
-    this._element.querySelector('.places__card-delete').addEventListener('click', () => {
-      this._handleDeleteCardClick();
-    });
-
-    this._element.querySelector('.places__photo').addEventListener('click', () => {
-    this._openFullScreenImage();
-    });
-
-  }
-
-  _handleDeleteCardClick() {
-    const delCard = this._element.closest('.places__element')
-    delCard.remove('places__card-delete');
-
-}
-  _openFullScreenImage() {
-  photoCardFullscreen.src = this._link;
-  photoCardFullscreen.alt = this._name;
-  locationCardFullscreen.textContent = this._name;
-  openPopup(popupCardFullscreen);
-  }
-}
-
+//Создание 6-ти стартовых карточек как элементов класса Card
 initialCards.forEach((item) => {
   const card = new Card(item, '#template-cards');
   const cardElement = card.generateCard();
   placesPhotoCards.prepend(cardElement);
 });
 
+//Создание карточки пользователем как элементов класса Card
 popupAddProfile.addEventListener('submit', () => {
   const newCard = {name: nameInputForm.value, link: linkInputForm.value};
   const userCard = new Card(newCard, '#template-cards');
@@ -137,7 +84,7 @@ popupCloseBtns.forEach(buttonclose => {
   buttonclose.addEventListener('click', function (evt) {
     const btnClose = evt.target.closest('.popup');
     closePopup(btnClose);
-});
+  });
 });
 
 //Попап добавления профиля
@@ -180,3 +127,22 @@ function closeByEsc(evt) {
     closePopup(openedPopup);
   };
 };
+
+//Объект с настройками для валидации форм
+const validationConfig = {
+  formSelector: '.form',
+  inputSelector: '.form__item',
+  submitButtonSelector: '.form__submit',
+  inactiveButtonClass: 'form__submit_disabled',
+  inputErrorClass: 'form__item_type_error',
+  errorClass: 'popup__error_visible'
+};
+
+//Создание инстансов класса валидации форм
+const validationProfile = new FormValidator(validationConfig, '.form');
+validationProfile.enableValidation();
+
+const validationNewLocation = new FormValidator(validationConfig, '.form_addprofile');
+validationNewLocation.enableValidation();
+
+export {validationConfig, photoCardFullscreen, locationCardFullscreen, popupCardFullscreen, openPopup};
