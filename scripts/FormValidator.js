@@ -12,6 +12,9 @@ export class FormValidator {
   }
 
   enableValidation() {
+    document.querySelector(this._form).addEventListener('submit', (evt) => {
+
+      evt.preventDefault()});
     this._addInputListener();
   };
 
