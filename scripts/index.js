@@ -34,7 +34,7 @@ const placesPhotoCards = document.querySelector('.places__photo-cards');
 const templateCards = document.querySelector('#template-cards').content;
 const popupCardFullscreen = document.querySelector('.popup_cardfullscreen');
 const popupAddProfile = document.querySelector('.popup_addprofile');
-const popupSubmitButton = popupAddProfile.querySelector('.form__submit');
+const popupSubmitAddProfile = popupAddProfile.querySelector('.form__submit');
 const nameInputForm = popupAddProfile.querySelector('.form__item_place_name');
 const linkInputForm = popupAddProfile.querySelector('.form__item_place_link');
 const profileName = document.querySelector('.profile__name');
@@ -49,6 +49,8 @@ const editProfile = document.querySelector('.profile__edit-button');
 const popupCloseBtns = document.querySelectorAll('.popup__button-close');
 const locationCardFullscreen = popupCardFullscreen.querySelector('.popup__card-location');
 const photoCardFullscreen = popupCardFullscreen.querySelector('.popup__card-photo');
+const popupList = document.querySelectorAll('.popup');
+const formAddProfile = document.querySelector('.form_addprofile');
 
 //Создание 6-ти стартовых карточек как элементов класса Card
 initialCards.forEach((item) => {
@@ -64,7 +66,7 @@ popupAddProfile.addEventListener('submit', () => {
   const userCardElement = userCard.generateCard();
   placesPhotoCards.prepend(userCardElement);
   closePopup(popupAddProfile);
-  document.querySelector('.form_addprofile').reset();
+  formAddProfile.reset();
 });
 
 //Универсальная функция открытие попапов
@@ -80,18 +82,18 @@ function closePopup(popup) {
 };
 
 //Закрытие попапов по крестику
-popupCloseBtns.forEach(buttonclose => {
-  buttonclose.addEventListener('click', function (evt) {
-    const btnClose = evt.target.closest('.popup');
-    closePopup(btnClose);
+popupCloseBtns.forEach((buttonclose) => {
+  buttonclose.addEventListener('click', (evt) => {
+    const popups = evt.target.closest('.popup');
+    closePopup(popups);
   });
 });
 
 //Попап добавления профиля
 function addProfile() {
   openPopup(popupAddProfile);
-  popupSubmitButton.disabled = true;
-  popupSubmitButton.classList.add('form__submit_disabled');
+  popupSubmitAddProfile.disabled = true;
+  popupSubmitAddProfile.classList.add('form__submit_disabled');
 };
 profileAddButton.addEventListener('click', addProfile);
 
@@ -111,13 +113,14 @@ function handleFormSubmit (evt) {
   closePopup(openPopupEditProfile);
 };
 formElement.addEventListener('submit', handleFormSubmit);
-console.log(initialCards);
 
 //Закрытие попапов по оверлею
-document.body.addEventListener('click', function (evt) {
-  if (evt.target.classList.contains('popup_opened')) {
-     closePopup(evt.target);
-  };
+popupList.forEach(item => {
+  item.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup_opened')) {
+       closePopup(evt.target);
+    };
+});
 });
 
 // Закрытие попапов по кнопке эскейп
@@ -141,7 +144,6 @@ const validationConfig = {
 //Создание инстансов класса валидации форм
 const validationProfile = new FormValidator(validationConfig, '.form');
 validationProfile.enableValidation();
-
 const validationNewLocation = new FormValidator(validationConfig, '.form_addprofile');
 validationNewLocation.enableValidation();
 

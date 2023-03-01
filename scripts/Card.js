@@ -17,33 +17,37 @@ export class Card {
 
   generateCard() {
     this._element = this._getTemplate();
-    this._element.querySelector('.places__photo').src = this._link;
-    this._element.querySelector('.places__card-name').textContent = this._name;
-    this._element.querySelector('.places__photo').alt = this._name;
+    this._cardImage = this._element.querySelector('.places__photo');
+    this._likeButton = this._element.querySelector('.places__button-like');
+    this._cardName = this._element.querySelector('.places__card-name');
+    this._deleteCardButton = this._element.querySelector('.places__card-delete');
+    this._cardImage.src = this._link;
+    this._cardName.textContent = this._name;
+    this._cardImage.alt = this._name;
     this._setEventListeners();
     return this._element;
   };
 
   _handleLikeClick() {
-    this._element.querySelector('.places__button-like').classList.toggle('places__button-like_active');
+    this._likeButton.classList.toggle('places__button-like_active');
   };
 
   _setEventListeners() {
-    this._element.querySelector('.places__button-like').addEventListener('click', () => {
+    this._likeButton.addEventListener('click', () => {
       this._handleLikeClick();
     });
-    this._element.querySelector('.places__card-delete').addEventListener('click', () => {
+    this._deleteCardButton.addEventListener('click', () => {
       this._handleDeleteCardClick();
     });
-    this._element.querySelector('.places__photo').addEventListener('click', () => {
+      this._cardImage.addEventListener('click', () => {
       this._openFullScreenImage();
     });
   };
 
   _handleDeleteCardClick() {
-    const delCard = this._element.closest('.places__element')
-    delCard.remove('places__card-delete');
-}
+    this._element.remove();
+    this._element = null;
+  }
   _openFullScreenImage() {
   photoCardFullscreen.src = this._link;
   photoCardFullscreen.alt = this._name;
