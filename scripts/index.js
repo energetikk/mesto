@@ -40,12 +40,12 @@ const linkInputForm = popupAddProfile.querySelector('.form__item_place_link');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 const profileAddButton = document.querySelector('.profile__addbutton');
-const popupAddPfofileClose = profileAddButton.querySelector('.popup__button-close');
-const openPopupEditProfile = document.querySelector('.popup_editprofile');
-const formElement = openPopupEditProfile.querySelector('.popup__container');
-const nameInput = formElement.querySelector('.form__item_el_name');
-const jobInput = formElement.querySelector('.form__item_el_job');
-const editProfile = document.querySelector('.profile__edit-button');
+// const popupAddPfofileClose = profileAddButton.querySelector('.popup__button-close');
+const popupEditProfile = document.querySelector('.popup_editprofile');
+const formEditProfile = popupEditProfile.querySelector('.popup__container');
+const nameInput = formEditProfile.querySelector('.form__item_el_name');
+const jobInput = formEditProfile.querySelector('.form__item_el_job');
+const buttonEditProfile = document.querySelector('.profile__edit-button');
 const popupCloseBtns = document.querySelectorAll('.popup__button-close');
 const locationCardFullscreen = popupCardFullscreen.querySelector('.popup__card-location');
 const photoCardFullscreen = popupCardFullscreen.querySelector('.popup__card-photo');
@@ -53,10 +53,14 @@ const popupList = document.querySelectorAll('.popup');
 const formAddProfile = document.querySelector('.form_addprofile');
 
 //Создание 6-ти стартовых карточек как элементов класса Card
-initialCards.forEach((item) => {
-  const card = new Card(item, '#template-cards');
+function createCard(element) {
+  const card = new Card(element, '#template-cards');
   const cardElement = card.generateCard();
-  placesPhotoCards.prepend(cardElement);
+  return cardElement;
+}
+
+initialCards.forEach((element) => {
+  placesPhotoCards.prepend(createCard(element));
 });
 
 //Создание карточки пользователем как элементов класса Card
@@ -83,8 +87,8 @@ function closePopup(popup) {
 
 //Закрытие попапов по крестику
 popupCloseBtns.forEach((buttonclose) => {
-  buttonclose.addEventListener('click', (evt) => {
-    const popups = evt.target.closest('.popup');
+  const popups = buttonclose.closest('.popup');
+  buttonclose.addEventListener('click', () => {
     closePopup(popups);
   });
 });
@@ -99,20 +103,22 @@ profileAddButton.addEventListener('click', addProfile);
 
 //Редактирование профиля
 function editButton() {
-  openPopup(openPopupEditProfile);
+  openPopup(popupEditProfile);
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 };
-
-editProfile.addEventListener('click', editButton);
+buttonEditProfile.addEventListener('click', editButton);
 
 function handleFormSubmit (evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  closePopup(openPopupEditProfile);
+  closePopup(popupEditProfile);
 };
-formElement.addEventListener('submit', handleFormSubmit);
+formEditProfile.addEventListener('submit', handleFormSubmit);
+formAddProfile.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+});
 
 //Закрытие попапов по оверлею
 popupList.forEach(item => {
