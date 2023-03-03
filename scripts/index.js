@@ -31,7 +31,7 @@ const initialCards = [
 
 //Находим и создаем элементы
 const placesPhotoCards = document.querySelector('.places__photo-cards');
-const templateCards = document.querySelector('#template-cards').content;
+// const templateCards = document.querySelector('#template-cards').content;
 const popupCardFullscreen = document.querySelector('.popup_cardfullscreen');
 const popupAddProfile = document.querySelector('.popup_addprofile');
 const popupSubmitAddProfile = popupAddProfile.querySelector('.form__submit');
@@ -40,7 +40,6 @@ const linkInputForm = popupAddProfile.querySelector('.form__item_place_link');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 const profileAddButton = document.querySelector('.profile__addbutton');
-// const popupAddPfofileClose = profileAddButton.querySelector('.popup__button-close');
 const popupEditProfile = document.querySelector('.popup_editprofile');
 const formEditProfile = popupEditProfile.querySelector('.popup__container');
 const nameInput = formEditProfile.querySelector('.form__item_el_name');
