@@ -31,7 +31,6 @@ const initialCards = [
 
 //Находим и создаем элементы
 const placesPhotoCards = document.querySelector('.places__photo-cards');
-// const templateCards = document.querySelector('#template-cards').content;
 const popupCardFullscreen = document.querySelector('.popup_cardfullscreen');
 const popupAddProfile = document.querySelector('.popup_addprofile');
 const popupSubmitAddProfile = popupAddProfile.querySelector('.form__submit');
@@ -41,7 +40,7 @@ const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 const profileAddButton = document.querySelector('.profile__addbutton');
 const popupEditProfile = document.querySelector('.popup_editprofile');
-const formEditProfile = popupEditProfile.querySelector('.popup__container');
+const formEditProfile = document.querySelector('.form_editProfile');
 const nameInput = formEditProfile.querySelector('.form__item_el_name');
 const jobInput = formEditProfile.querySelector('.form__item_el_job');
 const buttonEditProfile = document.querySelector('.profile__edit-button');
@@ -51,13 +50,14 @@ const photoCardFullscreen = popupCardFullscreen.querySelector('.popup__card-phot
 const popupList = document.querySelectorAll('.popup');
 const formAddProfile = document.querySelector('.form_addprofile');
 
-//Создание 6-ти стартовых карточек как элементов класса Card
+//Функция создания инстасов класса Card
 function createCard(element) {
   const card = new Card(element, '#template-cards');
   const cardElement = card.generateCard();
   return cardElement;
 }
 
+//Создание 6-ти стартовых карточек как элементов класса Card
 initialCards.forEach((element) => {
   placesPhotoCards.prepend(createCard(element));
 });
@@ -65,9 +65,7 @@ initialCards.forEach((element) => {
 //Создание карточки пользователем как элементов класса Card
 popupAddProfile.addEventListener('submit', () => {
   const newCard = {name: nameInputForm.value, link: linkInputForm.value};
-  const userCard = new Card(newCard, '#template-cards');
-  const userCardElement = userCard.generateCard();
-  placesPhotoCards.prepend(userCardElement);
+  placesPhotoCards.prepend(createCard(newCard));
   closePopup(popupAddProfile);
   formAddProfile.reset();
 });
@@ -86,16 +84,15 @@ function closePopup(popup) {
 
 //Закрытие попапов по крестику
 popupCloseBtns.forEach((buttonclose) => {
-  const popups = buttonclose.closest('.popup');
+  const popup = buttonclose.closest('.popup');
   buttonclose.addEventListener('click', () => {
-    closePopup(popups);
+    closePopup(popup);
   });
 });
 
 //Попап добавления профиля
 function addProfile() {
   openPopup(popupAddProfile);
-  popupSubmitAddProfile.disabled = true;
   popupSubmitAddProfile.classList.add('form__submit_disabled');
 };
 profileAddButton.addEventListener('click', addProfile);
@@ -108,16 +105,12 @@ function editButton() {
 };
 buttonEditProfile.addEventListener('click', editButton);
 
-function handleFormSubmit (evt) {
-  evt.preventDefault();
+function handleFormSubmit () {
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
   closePopup(popupEditProfile);
 };
 formEditProfile.addEventListener('submit', handleFormSubmit);
-formAddProfile.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-});
 
 //Закрытие попапов по оверлею
 popupList.forEach(item => {
@@ -125,7 +118,7 @@ popupList.forEach(item => {
     if (evt.target.classList.contains('popup_opened')) {
        closePopup(evt.target);
     };
-});
+  });
 });
 
 // Закрытие попапов по кнопке эскейп
@@ -147,9 +140,11 @@ const validationConfig = {
 };
 
 //Создание инстансов класса валидации форм
-const validationProfile = new FormValidator(validationConfig, '.form');
+
+const validationProfile = new FormValidator(validationConfig, formEditProfile);
 validationProfile.enableValidation();
-const validationNewLocation = new FormValidator(validationConfig, '.form_addprofile');
+
+const validationNewLocation = new FormValidator(validationConfig, formAddProfile);
 validationNewLocation.enableValidation();
 
 export {validationConfig, photoCardFullscreen, locationCardFullscreen, popupCardFullscreen, openPopup};

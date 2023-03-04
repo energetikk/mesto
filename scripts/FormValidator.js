@@ -6,19 +6,27 @@ export class FormValidator {
     this._inactiveButtonClass = config.inactiveButtonClass;
     this._errorClass = config.errorClass;
     this._inputErrorClass = config.inputErrorClass;
-    this._form = form;
-    this._formElement = document.querySelector(this._form);
+    this._formElement = form;
     this._submitButton = this._formElement.querySelector(this._submitButtonSelector);
     this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
   }
 
+  // Функция отмены по умолчанию обновления страницы при нажатии на Submit
+  _setFormPreventDefault() {
+    this._formElement.addEventListener('submit', function (evt) {
+      evt.preventDefault();
+    });
+  }
+
   // Функция валидации форм
   enableValidation() {
+    this._setFormPreventDefault();
     this._addInputListener();
   };
 
   // Функция навешивания события "input" на импуты формы
   _addInputListener() {
+    this._toggleButton();
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._handleFormInput(inputElement);
@@ -34,14 +42,14 @@ export class FormValidator {
     this._submitButton.classList.toggle(this._inactiveButtonClass, !isValidForm);
   };
 
-// Показать ошибку
+  // Показать ошибку
   _showInputError(inputElement, errorMessage) {
     const errorInput = document.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(this._inputErrorClass);
     errorInput.textContent = errorMessage;
   };
 
-// Скрыть ошибку
+  // Скрыть ошибку
   _hideInputError (inputElement) {
     const errorInput = document.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(this._inputErrorClass);
@@ -49,7 +57,7 @@ export class FormValidator {
     errorInput.textContent = '';
   };
 
-// Управлением показом или сокрытием ошибок валидации
+  // Управлением показом или сокрытием ошибок валидации
   _handleFormInput(inputElement) {
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement, inputElement.validationMessage);
