@@ -1,7 +1,7 @@
 import {Card} from './Card.js';
 import {FormValidator} from './FormValidator.js';
 
-//Добавление первых 6 карточек на страницу
+//Массив данных для загрузки первых 6-ти карточек на страницу
 const initialCards = [
   {
     name: 'Архыз',
@@ -92,8 +92,9 @@ popupCloseBtns.forEach((buttonclose) => {
 
 //Попап добавления профиля
 function addProfile() {
+  formAddProfile.reset();
+  validationNewLocation.resetValidation();
   openPopup(popupAddProfile);
-  popupSubmitAddProfile.classList.add('form__submit_disabled');
 };
 profileAddButton.addEventListener('click', addProfile);
 
@@ -140,7 +141,6 @@ const validationConfig = {
 };
 
 //Создание инстансов класса валидации форм
-
 const validationProfile = new FormValidator(validationConfig, formEditProfile);
 validationProfile.enableValidation();
 
