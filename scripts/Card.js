@@ -1,6 +1,8 @@
-import {photoCardFullscreen, locationCardFullscreen, openPopup, popupCardFullscreen} from './index.js'
+// import {photoCardFullscreen, locationCardFullscreen, openPopup, popupCardFullscreen} from './index.js'
+import {photoCardFullscreen, locationCardFullscreen, popupCardFullscreen} from './index.js'
 export class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, handleCardClick) {
+    this.handleCardClick = handleCardClick;
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
@@ -40,7 +42,8 @@ export class Card {
       this._handleDeleteCardClick();
     });
       this._cardImage.addEventListener('click', () => {
-      this._openFullScreenImage();
+      // this._openFullScreenImage();
+      this._handleCardClick(this._name, this._link);
     });
   };
 
@@ -48,10 +51,10 @@ export class Card {
     this._element.remove();
     this._element = null;
   }
-  _openFullScreenImage() {
-  photoCardFullscreen.src = this._link;
-  photoCardFullscreen.alt = this._name;
-  locationCardFullscreen.textContent = this._name;
-  openPopup(popupCardFullscreen);
-  };
+  // _openFullScreenImage() {
+  // photoCardFullscreen.src = this._link;
+  // photoCardFullscreen.alt = this._name;
+  // locationCardFullscreen.textContent = this._name;
+  // openPopup(popupCardFullscreen);
+  // };
 };
