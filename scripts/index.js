@@ -86,20 +86,7 @@ section.renderItems();
 
 
 
-class UserInfo {
-  constructor({selectorUserName, selectorUserJob}) {
-    this.selectorUserName = selectorUserName;
-    this.selectorUserJob = selectorUserJob;
-  }
 
-  getUserInfo() {
-
-  }
-
-  setUserInfo() {
-
-  }
-}
 
 //////////////////////////////////////////////////////////////////
 class Popup {
@@ -149,8 +136,10 @@ setEventListeners() {
 const editProfile = new Popup ('.popup_editprofile');
 buttonEditProfile.addEventListener('click', () => {
   editProfile.openPopup();
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
+  // nameInput.value = profileName.textContent;
+  // jobInput.value = profileJob.textContent;
+  // const {a, b} = userInfo.getUserInfo();
+  // nameInput.value = a;
 });
 editProfile.setEventListeners();
 
@@ -169,20 +158,13 @@ class PopupWithImage extends Popup {
     }
     openPopup(name, link) {
       super.openPopup();
-      // photoCardFullscreen.src = link;
-      // photoCardFullscreen.alt = name;
-      // locationCardFullscreen.textContent = name;
       this._popupCardFullscreen = document.querySelector('.popup_cardfullscreen');
       this._popupCardFullscreenName = this._popupCardFullscreen.querySelector('.popup__card-location');
       this._popupCardFullscreenLink = this._popupCardFullscreen.querySelector('.popup__card-photo');
       this._popupCardFullscreenName.textContent = name;
       this._popupCardFullscreenLink.src = link;
       this._popupCardFullscreenLink.alt = name;
-      // openPopup(popup_cardfullscreen);
-
-        };
-
-
+    };
   }
 
 function handleCardClick(name, link) {
@@ -191,6 +173,49 @@ function handleCardClick(name, link) {
   popupFull.openPopup(name, link)
   popupFull.setEventListeners()
   }
+
+class UserInfo {
+  constructor({profileName, profileJob}) {
+    this.profileName = document.querySelector(profileName);
+    this.profileJob = document.querySelector(profileJob);
+  }
+
+  getUserInfo() {
+    // let obj = {};
+    // nameInput.value = this.profileName.textContent;
+    // jobInput.value = this.profileJob.textContent;
+    // obj.name = this.selectorUserName;
+    // // obj.job =
+    return {name: this.profileName.textContent, job: this.profileJob.textContent}
+
+  }
+
+
+
+  setUserInfo() {
+    this.profileName.textContent = nameInput.value;
+    this.profileJob.textContent = jobInput.value;
+    console.log(jobInput);
+
+    // profileName.textContent = nameInput.value;
+//   profileJob.textContent = jobInput.value;
+  }
+}
+
+
+const userInfo = new UserInfo ({profileName: '.profile__name', profileJob: '.profile__job'});
+console.log(userInfo.getUserInfo())
+
+const {name, job} = userInfo.getUserInfo();
+console.log(name)
+nameInput.value = name;
+jobInput.value = job;
+
+
+
+
+
+
 
 
 
@@ -210,7 +235,7 @@ function handleCardClick(name, link) {
 //   placesPhotoCards.prepend(createCard(element));
 // });
 
-// //Создание карточки пользователем как элементов класса Card
+//Создание карточки пользователем как элементов класса Card
 // popupAddProfile.addEventListener('submit', () => {
 //   const newCard = {name: nameInputForm.value, link: linkInputForm.value};
 //   placesPhotoCards.prepend(createCard(newCard));
@@ -295,5 +320,5 @@ validationProfile.enableValidation();
 const validationNewLocation = new FormValidator(validationConfig, formAddProfile);
 validationNewLocation.enableValidation();
 
-// export {validationConfig, photoCardFullscreen, locationCardFullscreen, popupCardFullscreen, openPopup};
-export {photoCardFullscreen, locationCardFullscreen, popupCardFullscreen, handleCardClick};
+export {validationConfig, photoCardFullscreen, locationCardFullscreen};
+export {popupCardFullscreen, handleCardClick};
