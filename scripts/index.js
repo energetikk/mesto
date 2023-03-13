@@ -74,7 +74,7 @@ renderItems() {
 
 const section = new Section({data: initialCards, renderer:
    (item) => {
-    const card = new Card(item, '#template-cards');
+    const card = new Card(item, '#template-cards', handleCardClick);
     const cardElement = card.generateCard();
     // return cardElement
     section.addItem(cardElement);}
@@ -167,27 +167,31 @@ class PopupWithImage extends Popup {
     super(popupSelector);
 
     }
-    openPopup() {
+    openPopup(name, link) {
       super.openPopup();
-      photoCardFullscreen.src = this._link;
-        photoCardFullscreen.alt = this._name;
-        locationCardFullscreen.textContent = this._name;
-        openPopup(popup_cardfullscreen);
+      // photoCardFullscreen.src = link;
+      // photoCardFullscreen.alt = name;
+      // locationCardFullscreen.textContent = name;
+      this._popupCardFullscreen = document.querySelector('.popup_cardfullscreen');
+      this._popupCardFullscreenName = this._popupCardFullscreen.querySelector('.popup__card-location');
+      this._popupCardFullscreenLink = this._popupCardFullscreen.querySelector('.popup__card-photo');
+      this._popupCardFullscreenName.textContent = name;
+      this._popupCardFullscreenLink.src = link;
+      this._popupCardFullscreenLink.alt = name;
+      // openPopup(popup_cardfullscreen);
 
         };
 
 
   }
 
+function handleCardClick(name, link) {
+  const popupFull = new PopupWithImage('.popup_cardfullscreen')
 
-const popupFull = new PopupWithImage('.popup_cardfullscreen')
-document.querySelectorAll('.places__photo').forEach((item) =>
-  item.addEventListener('click', () => {
-  popupFull.openPopup()
+  popupFull.openPopup(name, link)
   popupFull.setEventListeners()
-  // popupFull.closePopup();
-  })
-)
+  }
+
 
 
 // buttonclose.addEventListener('click', () => {
@@ -292,4 +296,4 @@ const validationNewLocation = new FormValidator(validationConfig, formAddProfile
 validationNewLocation.enableValidation();
 
 // export {validationConfig, photoCardFullscreen, locationCardFullscreen, popupCardFullscreen, openPopup};
-export {photoCardFullscreen, locationCardFullscreen, popupCardFullscreen};
+export {photoCardFullscreen, locationCardFullscreen, popupCardFullscreen, handleCardClick};

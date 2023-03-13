@@ -1,8 +1,8 @@
 // import {photoCardFullscreen, locationCardFullscreen, openPopup, popupCardFullscreen} from './index.js'
-import {photoCardFullscreen, locationCardFullscreen, popupCardFullscreen} from './index.js'
+import {photoCardFullscreen, locationCardFullscreen, popupCardFullscreen, handleCardClick} from './index.js'
 export class Card {
   constructor(data, templateSelector, handleCardClick) {
-    this.handleCardClick = handleCardClick;
+    this._handleCardClick = handleCardClick;
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
@@ -41,8 +41,7 @@ export class Card {
     this._deleteCardButton.addEventListener('click', () => {
       this._handleDeleteCardClick();
     });
-      this._cardImage.addEventListener('click', () => {
-      // this._openFullScreenImage();
+    this._cardImage.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);
     });
   };
