@@ -1,28 +1,17 @@
-// export class Section {
-//   constructor({items, renderer}, containerSelector) {
-//     this.items = items;
-//     this.renderer = renderer;
-//     this.containerSelector = document.querySelector(containerSelector);
-//   }
+export default class Section {
+  constructor({data, renderer}, containerSelector) {
+    this._items = data;
+    this._renderer = renderer;
+    this._containerSelector = document.querySelector(containerSelector);
+  }
 
+addItem(element) {
+  this._containerSelector.prepend(element);
+}
 
-// addItem(element) {
-//   this.containerSelector.prepend(element);
-
-// renderItems() {
-//   this.items.forEach((item) => {
-//     this.renderer(item);
-//   });
-// }
-
-// }
-
-
-
-
-// }
-
-
-
-// const section = new Section({initialCards, renderer: () => {}}, placesPhotoCards);
-// section.renderItems();
+renderItems() {
+  this._items.forEach((item) => {
+    this._renderer(item);
+  });
+};
+}
