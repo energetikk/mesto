@@ -9,6 +9,11 @@ addItem(element) {
   this._containerSelector.prepend(element);
 }
 
+renderNewCard(item) {
+  this._renderer(item);
+}
+
+
 renderItems() {
   this._items.forEach((item) => {
     this._renderer(item);

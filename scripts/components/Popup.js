@@ -3,6 +3,7 @@ export default class Popup {
     this.popupElement = document.querySelector(popupSelector);
     this.buttonCloseAll = document.querySelectorAll('.popup__button-close');
   }
+
 //Универсальная функция открытие попапов
   openPopup() {
     this.popupElement.classList.add('popup_opened');
@@ -26,6 +27,7 @@ _handleEscClose(evt) {
     this.closePopup();
 }
 }
+
 //Слушатели событий клика закрытия попапа по крестику и по клику в облсти оверлея
 setEventListeners() {
   this.buttonCloseAll.forEach((buttonclose) => {
