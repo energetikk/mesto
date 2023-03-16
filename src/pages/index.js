@@ -1,3 +1,5 @@
+import './index.css';
+
 import {Card} from '../scripts/components/Card.js';
 import {FormValidator} from '../scripts/components/FormValidator.js';
 import Section from '../scripts/components/Section.js';
@@ -49,7 +51,6 @@ function handleCardClick(name, link) {
   }
 
 const userInfo = new UserInfo ({profileName: '.profile__name', profileJob: '.profile__job'});
-console.log(userInfo.getUserInfo())
 const {name, job} = userInfo.getUserInfo();
 nameInput.value = name;
 jobInput.value = job;
@@ -74,6 +75,7 @@ popupFormAddProfile.setEventListeners()
 
 //Открытие попапа редактирования профиля
 buttonEditProfile.addEventListener('click', () => {
+  validationProfile.enableValidation();
   popupProfileEdit.openPopup();
 });
 popupProfileEdit.setEventListeners();
@@ -81,15 +83,17 @@ popupProfileEdit.setEventListeners();
 
 //Открытие попапа добавления новой карточки
 profileAddButton.addEventListener('click', () => {
+  validationNewLocation.enableValidation();
+  formAddProfile.reset();
   popupFormAddProfile.openPopup();
 });
 
 //Создание инстансов класса валидации форм
 const validationProfile = new FormValidator(validationConfig, formEditProfile);
-validationProfile.enableValidation();
+// validationProfile.enableValidation();
 
 const validationNewLocation = new FormValidator(validationConfig, formAddProfile);
-validationNewLocation.enableValidation();
+// validationNewLocation.enableValidation();
 
 export {photoCardFullscreen, locationCardFullscreen};
 export {popupCardFullscreen, handleCardClick};
