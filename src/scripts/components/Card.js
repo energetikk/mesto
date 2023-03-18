@@ -1,5 +1,3 @@
-// import {photoCardFullscreen, locationCardFullscreen, openPopup, popupCardFullscreen} from './index.js'
-// import {photoCardFullscreen, locationCardFullscreen, popupCardFullscreen, handleCardClick} from '../index.js'
 export class Card {
   constructor(data, templateSelector, handleCardClick) {
     this._handleCardClick = handleCardClick;

@@ -11,16 +11,9 @@ export class FormValidator {
     this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
   }
 
-  // Функция отмены по умолчанию обновления страницы при нажатии на Submit
-  _setFormPreventDefault() {
-    this._formElement.addEventListener('submit', function (evt) {
-      evt.preventDefault();
-    });
-  }
-
   // Функция валидации форм
   enableValidation() {
-    this._setFormPreventDefault();
+    // this._setFormPreventDefault();
     this._addInputListener();
   };
 
@@ -44,14 +37,14 @@ export class FormValidator {
 
   // Показать ошибку
   _showInputError(inputElement, errorMessage) {
-    const errorInput = document.querySelector(`#${inputElement.id}-error`);
+    const errorInput = this._formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(this._inputErrorClass);
     errorInput.textContent = errorMessage;
   };
 
   // Скрыть ошибку
   _hideInputError (inputElement) {
-    const errorInput = document.querySelector(`#${inputElement.id}-error`);
+    const errorInput = this._formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(this._inputErrorClass);
     errorInput.classList.remove(this._inputErrorClass);
     errorInput.textContent = '';

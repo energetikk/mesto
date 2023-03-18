@@ -1,9 +1,7 @@
 import './index.css';
-
 import {Card} from '../scripts/components/Card.js';
 import {FormValidator} from '../scripts/components/FormValidator.js';
 import Section from '../scripts/components/Section.js';
-// import Popup from './components/Popup.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import UserInfo from '../scripts/components/UserInfo.js';
@@ -30,6 +28,7 @@ const locationCardFullscreen = popupCardFullscreen.querySelector('.popup__card-l
 const photoCardFullscreen = popupCardFullscreen.querySelector('.popup__card-photo');
 const popupList = document.querySelectorAll('.popup');
 const formAddProfile = document.querySelector('.form_addprofile');
+const popupFull = new PopupWithImage('.popup_cardfullscreen');
 
 const cardSection = new Section({data: initialCards, renderer:
    (item) => {cardSection.addItem(addNewCard(item));}
@@ -45,55 +44,50 @@ function addNewCard(item) {
 };
 
 function handleCardClick(name, link) {
-  const popupFull = new PopupWithImage('.popup_cardfullscreen');
   popupFull.openPopup(name, link);
   popupFull.setEventListeners()
-  }
+}
 
 const userInfo = new UserInfo ({profileName: '.profile__name', profileJob: '.profile__job'});
-const {name, job} = userInfo.getUserInfo();
-nameInput.value = name;
-jobInput.value = job;
 
-//создание экземпляра класса PopupWithForm редактирование профиял
+// создание экземпляра класса PopupWithForm редактирование профиля
 const popupProfileEdit = new PopupWithForm({popupSelector: '.popup_editprofile', handleSubmitForm:
 (formData) => {
   userInfo.setUserInfo(formData);
-  popupProfileEdit.closePopup();
-  validationProfile.resetValidation();
 }});
+
 popupProfileEdit.setEventListeners();
 
 //создание экземпляра класса PopupWithForm добавления новой карточки профиля
 const popupFormAddProfile = new PopupWithForm ({popupSelector: '.popup_addprofile', handleSubmitForm:
 (formData) => {
-  cardSection.renderNewCard(formData);
   popupFormAddProfile.closePopup();
-  formAddProfile.reset();
+  cardSection.renderNewCard(formData);
 }});
+
 popupFormAddProfile.setEventListeners()
 
 //Открытие попапа редактирования профиля
 buttonEditProfile.addEventListener('click', () => {
-  validationProfile.enableValidation();
+  validationProfile.resetValidation();
   popupProfileEdit.openPopup();
+  const {name, job} = userInfo.getUserInfo();
+  nameInput.value = name;
+  jobInput.value = job;
 });
-popupProfileEdit.setEventListeners();
-
 
 //Открытие попапа добавления новой карточки
 profileAddButton.addEventListener('click', () => {
-  validationNewLocation.enableValidation();
-  formAddProfile.reset();
+  validationNewLocation.resetValidation()
   popupFormAddProfile.openPopup();
 });
 
 //Создание инстансов класса валидации форм
 const validationProfile = new FormValidator(validationConfig, formEditProfile);
-// validationProfile.enableValidation();
+validationProfile.enableValidation();
 
 const validationNewLocation = new FormValidator(validationConfig, formAddProfile);
-// validationNewLocation.enableValidation();
+validationNewLocation.enableValidation();
 
 export {photoCardFullscreen, locationCardFullscreen};
 export {popupCardFullscreen, handleCardClick};
