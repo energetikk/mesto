@@ -30,6 +30,8 @@ const popupList = document.querySelectorAll('.popup');
 const formAddProfile = document.querySelector('.form_addprofile');
 const popupFull = new PopupWithImage('.popup_cardfullscreen');
 
+popupFull.setEventListeners();
+
 const cardSection = new Section({data: initialCards, renderer:
    (item) => {cardSection.addItem(addNewCard(item));}
     }, '.places__photo-cards');
@@ -45,7 +47,7 @@ function addNewCard(item) {
 
 function handleCardClick(name, link) {
   popupFull.openPopup(name, link);
-  popupFull.setEventListeners()
+
 }
 
 const userInfo = new UserInfo ({profileName: '.profile__name', profileJob: '.profile__job'});
@@ -69,11 +71,11 @@ popupFormAddProfile.setEventListeners()
 
 //Открытие попапа редактирования профиля
 buttonEditProfile.addEventListener('click', () => {
-  validationProfile.resetValidation();
   popupProfileEdit.openPopup();
   const {name, job} = userInfo.getUserInfo();
   nameInput.value = name;
   jobInput.value = job;
+  validationProfile.resetValidation();
 });
 
 //Открытие попапа добавления новой карточки
