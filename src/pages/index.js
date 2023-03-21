@@ -7,6 +7,7 @@ import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 import {initialCards} from '../scripts/utils/constants.js'
 import {validationConfig} from '../scripts/utils/constants.js'
+import { Api } from '../scripts/components/Api';
 
 // Находим и создаем элементы
 const placesPhotoCards = document.querySelector('.places__photo-cards');
@@ -91,6 +92,40 @@ validationProfile.enableValidation();
 const validationNewLocation = new FormValidator(validationConfig, formAddProfile);
 validationNewLocation.enableValidation();
 
+
+
+
+
+
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-62',
+  headers: {
+    authorization: 'edc06021-97df-405d-a469-7d3ba7b0f077',
+    'Content-Type': 'application/json'
+  }
+});
+
+api.getInitialCards()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export {photoCardFullscreen, locationCardFullscreen};
 export {popupCardFullscreen, handleCardClick};
+
+
 

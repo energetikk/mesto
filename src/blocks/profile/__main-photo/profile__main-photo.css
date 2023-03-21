@@ -9,3 +9,21 @@
     margin-bottom: 26px;
   }
 }
+
+.profile__main-photo:hover {
+  background-color: rgba(0,0,0, .2);
+  opacity: 0.8;
+  background-image: url(../../../images/editProfileButton.png);
+  object-fit: cover;
+}
+
+
+.editbutton {
+  background-image: url(../../../images/editProfileButton.png);
+  border: red 2px solid;
+  width: 100px;
+  height: 50px;
+  color: aqua;
+  position: absolute;
+
+}
