@@ -1,14 +1,14 @@
 export class Api {
-  constructor(options) {
-    // тело конструктора
+  constructor(config) {
+    this._url = config.url,
+    this._headers = config.headers;
   }
 
   getInitialCards() {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-62/cards', {
-      headers: {
-        authorization: 'edc06021-97df-405d-a469-7d3ba7b0f077'
-      }
-    })
+    return fetch(this._url, {
+      headers: {authorization: 'edc06021-97df-405d-a469-7d3ba7b0f077'
+      }})
+
       .then(res => {
         if (res.ok) {
           return res.json();
@@ -16,9 +16,11 @@ export class Api {
 
         // если ошибка, отклоняем промис
         return Promise.reject(`Ошибка: ${res.status}`);
-      });
-  }
+      })
 
-  // другие методы работы с API
+
+  }
 }
+  // другие методы работы с API
+
 
