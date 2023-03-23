@@ -17,10 +17,22 @@ export class Api {
         // если ошибка, отклоняем промис
         return Promise.reject(`Ошибка: ${res.status}`);
       })
-
-
   }
+
+  addCard(data) {
+    return fetch(this._url, {
+      method: POST,
+      headers: this._headers,
+      body: JSON.stringify(data)})
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject("Произошла ошибка")
+      })
+    }
+
 }
-  // другие методы работы с API
+
 
 

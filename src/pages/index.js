@@ -55,7 +55,7 @@ function handleCardClick(name, link) {
 
 
 const cardsStart = api.getInitialCards();
-console.log(cardsStart);
+
 // console.log(initialCards);
 cardsStart.then((data) => {
   const cardSection = new Section({data: data, renderer:
