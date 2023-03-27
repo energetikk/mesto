@@ -17,8 +17,10 @@
   <main>
     <section class="profile">
       <div class="profile__info">
-        <img src="<%=require('./images/profile-main-photo.jpg')%>" alt="Фотография профиля пользователя" class="profile__main-photo">
-        <!-- <button type="button" class="editbutton">Ryjgrf</button> -->
+        <div class="profile__avatar">
+          <img src="<%=require('./images/profile-main-photo.jpg')%>" alt="Фотография профиля пользователя" class="profile__main-photo">
+          <button type="submit" class="profile__edit-button-avatar"></button>
+        </div>
         <div class="profile__heading">
           <div class="profile__title">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -79,6 +81,30 @@
           <p class="popup__card-location"></p>
         </figcaption>
       </figure>
+      <button type="button" class="popup__button-close"></button>
+    </div>
+  </div>
+
+  <div class="popup popup_addavatarprofile">
+    <div class="popup__container">
+      <form name="info" class="form form_addavatarprofile" novalidate>
+        <h2 class="form__title">Обновить аватар</h2>
+        <fieldset class="form__input-container">
+          <input id="input-link" type="url" required name="link" placeholder="Ссылка на картинку" class="form__item form__item_avatar_link">
+          <span id="input-link-error" class="popup__error"></span>
+        </fieldset>
+        <button type="submit" class="form__submit">Сохранить</button>
+      </form>
+      <button type="button" class="popup__button-close"></button>
+    </div>
+  </div>
+
+  <div class="popup popup_confirm">
+    <div class="popup__container">
+      <form name="info" class="form form_confirm" novalidate>
+        <h2 class="form__title">Вы уверены?</h2>
+        <button type="submit" class="form__submit">Да</button>
+      </form>
       <button type="button" class="popup__button-close"></button>
     </div>
   </div>

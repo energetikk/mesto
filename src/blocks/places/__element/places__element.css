@@ -6,6 +6,9 @@
   line-height: 0;
   max-width: 282px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 @media screen and (max-width: 615px) {
