@@ -28,6 +28,7 @@ const locationCardFullscreen = popupCardFullscreen.querySelector('.popup__card-l
 const photoCardFullscreen = popupCardFullscreen.querySelector('.popup__card-photo');
 const popupList = document.querySelectorAll('.popup');
 const formAddProfile = document.querySelector('.form_addprofile');
+const formEditAvatar = document.querySelector('.form_editavatarprofile');
 const popupFull = new PopupWithImage('.popup_cardfullscreen');
 const buttonCardDelete = document.querySelectorAll('.places__card-delete')
 
@@ -57,12 +58,18 @@ const cardSection = new Section({renderer:
   cardSection.renderItems(data);
 })
 
-const userInfo = new UserInfo ({profileName: '.profile__name', profileJob: '.profile__job'});
+const userInfo = new UserInfo ({profileName: '.profile__name', profileJob: '.profile__job', avatarImage: '.profile__main-photo'});
 
 // создание экземпляра класса PopupWithForm редактирование профиля
 const popupProfileEdit = new PopupWithForm({popupSelector: '.popup_editprofile', handleSubmitForm:
 (formData) => {
-  userInfo.setUserInfo(formData);
+  console.log(formData)
+  api.setUserInfo(formData)
+  .then((data) => {
+    userInfo.setUserInfo(data);
+
+  })
+
 }});
 
 popupProfileEdit.setEventListeners();
@@ -101,31 +108,38 @@ validationProfile.enableValidation();
 const validationNewLocation = new FormValidator(validationConfig, formAddProfile);
 validationNewLocation.enableValidation();
 
+
+const validationEditAvatar = new FormValidator(validationConfig, formEditAvatar);
+validationEditAvatar.enableValidation();
+
 export {photoCardFullscreen, locationCardFullscreen};
 export {popupCardFullscreen, handleCardClick};
 
 
-// document.querySelector('.profile__edit-button-avatar').addEventListener('click', () => {
-//   console.log('Hello World')
-// })
-
-
 //создание экземпляра класса PopupWithForm редактирование аватара пользователя
 const popupFormAvatarProfile = new PopupWithForm ({popupSelector: '.popup_addavatarprofile', handleSubmitForm:
-() => {
-  // api.addCard(formData)
-  // .then((data) => {
-  //   // cardSection.addItem(addNewCard(data))
+(formData) => {
+  console.log(formData)
+  api.setAvatar(formData)
+  .then((data) => {
+    console.log(data)
+    // document.querySelector('.profile__main-photo').src = data.link;
+    userInfo.setAvatarImage(data.avatar);
+  })
   popupFormAvatarProfile.closePopup();
 }
-
 });
 
-
-console.log(popupFormAvatarProfile)
 const editButtonAvatar = document.querySelector('.profile__edit-button-avatar');
 editButtonAvatar.addEventListener('click', () => {
-
   popupFormAvatarProfile.openPopup();
 })
 popupFormAvatarProfile.setEventListeners()
+
+// Установка начальных значений профиля
+api.getUserInfo()
+.then((data) => {
+  console.log(data);
+  userInfo.setUserInfo(data)
+})
+
