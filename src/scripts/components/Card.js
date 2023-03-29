@@ -1,9 +1,13 @@
 export class Card {
-  constructor(data, templateSelector, handleCardClick) {
+  constructor(data, templateSelector, handleCardClick, userId, {handleDeleteIconClick}) {
     this._handleCardClick = handleCardClick;
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
+    this._ownerId = data.owner._id
+    this._userId = userId;
+    this._cardId = data._id;
+    this._handleDeleteIconClick = handleDeleteIconClick;
   }
 
   _getTemplate() {
@@ -24,6 +28,14 @@ export class Card {
     this._cardImage.src = this._link;
     this._cardName.textContent = this._name;
     this._cardImage.alt = this._name;
+
+    // console.log(this._ownerId !== this._userId)
+    // console.log(this._userId)
+
+    if (this._ownerId !== this._userId) {
+      // if (this._ownerId !== 'c7d1d743525468e2b49c0fef') {
+        this._deleteCardButton.remove();
+      }
     this._setEventListeners();
     return this._element;
   };
@@ -37,7 +49,8 @@ export class Card {
       this._handleLikeClick();
     });
     this._deleteCardButton.addEventListener('click', () => {
-      this._handleDeleteCardClick();
+      // this._handleDeleteCardClick();
+      this._handleDeleteIconClick(this._cardId);
     });
     this._cardImage.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);
@@ -48,4 +61,26 @@ export class Card {
     this._element.remove();
     this._element = null;
   }
+
+  deleteCard() {
+      this._element.remove();
+      this._element = null;
+    }
+
+
+
+  _checkOwnerCard() {
+    if (this._ownerID !== user._id) {
+      this._deleteCardButton.addEventListener('click', () => {
+        this._handleDeleteCardClick();
+      });
+    } else {
+      this._element.classList.remove('places__card-delete')
+    }
+
+  }
+
+
+
+
 };

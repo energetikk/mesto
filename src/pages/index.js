@@ -4,6 +4,7 @@ import {FormValidator} from '../scripts/components/FormValidator.js';
 import Section from '../scripts/components/Section.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
+import PopupWithConfirm from '../scripts/components/PopupWithConfirm.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 import {validationConfig} from '../scripts/utils/constants.js'
 import { Api } from '../scripts/components/Api';
@@ -30,9 +31,11 @@ const popupList = document.querySelectorAll('.popup');
 const formAddProfile = document.querySelector('.form_addprofile');
 const formEditAvatar = document.querySelector('.form_editavatarprofile');
 const popupFull = new PopupWithImage('.popup_cardfullscreen');
-const buttonCardDelete = document.querySelectorAll('.places__card-delete')
+const buttonCardDelete = document.querySelector('.places__card-delete')
 
 popupFull.setEventListeners();
+
+let userId;
 
 const api = new Api({url: 'https://mesto.nomoreparties.co/v1/cohort-62/cards',
  headers: {
@@ -41,22 +44,76 @@ const api = new Api({url: 'https://mesto.nomoreparties.co/v1/cohort-62/cards',
   }
 });
 
-function addNewCard(item) {
-  const card = new Card(item, '#template-cards',
-  () => handleCardClick(item.name, item.link));
+// function handleDeleteIconClick(cardId) {
+//   popupConfirmDelete.openPopup();
+//   popupConfirmDelete.handleConfirm(() => {
+//     // console.log(card)
+//     api.deleteCard(cardId)
+//     .then(() => {
+//       // card._handleDeleteCardClick;
+//       // card.deleteCard();
+//       popupConfirmDelete.closePopup()
+//     })
+//   })
+// }
+
+
+
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([user, cards]) => {
+    userInfo.setUserInfo(user);
+    userId = user._id;
+    cardSection.renderItems(cards);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+
+
+
+
+
+
+
+
+
+function addNewCard(item, userId) {
+  const card = new Card(item, '#template-cards', () => handleCardClick(item.name, item.link), userId,
+  {handleDeleteIconClick: (cardId) => {
+    popupConfirmDelete.openPopup();
+    popupConfirmDelete.handleConfirm(() => {
+      // console.log(card)
+      api.deleteCard(cardId)
+      .then(() => {
+        card.deleteCard();
+        popupConfirmDelete.closePopup()
+      })
+    })
+  }}
+
+  )
+
   return card.generateCard();
 };
+
+
+
 function handleCardClick(name, link) {
   popupFull.openPopup(name, link);
 }
 
+
+
+
 const cardSection = new Section({renderer:
-  (item) => {cardSection.addItem(addNewCard(item));}
+  (item) => {cardSection.addItem(addNewCard(item, userId));}
    }, '.places__photo-cards');
    api.getInitialCards()
-   .then((data) => {
-  cardSection.renderItems(data);
-})
+//    .then((data) => {
+//   cardSection.renderItems(data);
+// })
 
 const userInfo = new UserInfo ({profileName: '.profile__name', profileJob: '.profile__job', avatarImage: '.profile__main-photo'});
 
@@ -67,7 +124,6 @@ const popupProfileEdit = new PopupWithForm({popupSelector: '.popup_editprofile',
   api.setUserInfo(formData)
   .then((data) => {
     userInfo.setUserInfo(data);
-
   })
 
 }});
@@ -79,7 +135,7 @@ const popupFormAddProfile = new PopupWithForm ({popupSelector: '.popup_addprofil
 (formData) => {
   api.addCard(formData)
   .then((data) => {
-    cardSection.addItem(addNewCard(data))
+    cardSection.addItem(addNewCard(data, userId))
     popupFormAddProfile.closePopup();
   })
 }});
@@ -136,10 +192,27 @@ editButtonAvatar.addEventListener('click', () => {
 })
 popupFormAvatarProfile.setEventListeners()
 
+
+
+
 // Установка начальных значений профиля
-api.getUserInfo()
-.then((data) => {
-  console.log(data);
-  userInfo.setUserInfo(data)
-})
+// api.getUserInfo()
+// .then((data) => {
+//   console.log(data);
+//   userInfo.setUserInfo(data);
+//   userId = data._id;
+//   console.log(userId)
+// })
+// console.log(userId)
+
+
+
+
+//создание экземпляра класса PopupWithConfirm подтверждения удаления
+const popupConfirmDelete = new PopupWithConfirm ('.popup_confirm')
+console.log(popupConfirmDelete)
+popupConfirmDelete.setEventListeners();
+
+
+
 

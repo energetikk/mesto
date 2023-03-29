@@ -7,7 +7,7 @@ export class Api {
     this._url = config.url,
     this._headers = config.headers;
   }
-
+//Получить начальные карточки с сервера
   getInitialCards() {
     return fetch(this._url, {
       headers: {authorization: 'edc06021-97df-405d-a469-7d3ba7b0f077'
@@ -20,7 +20,7 @@ export class Api {
         return Promise.reject(`Ошибка: ${res.status}`);
       })
   }
-
+//Добавить карточку на сервер
   addCard(data) {
     return fetch(this._url, {
       method: 'POST',
@@ -37,7 +37,7 @@ export class Api {
       });
     }
 
-
+//Запросить информацию о пользователе с сервера
   getUserInfo() {
     return fetch('https://nomoreparties.co/v1/cohort-62/users/me', {
     method: 'GET',
@@ -51,7 +51,7 @@ export class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   })
   }
-
+//Записать обновленную информацию о пользователе на сервер
   setUserInfo(data) {
     console.log(data)
     return fetch('https://mesto.nomoreparties.co/v1/cohort-62/users/me/', {
@@ -70,7 +70,7 @@ export class Api {
 
 
 }
-
+//Записать обновленный аватар пользователя на сервер
   setAvatar(data) {
     console.log(data)
     return fetch('https://mesto.nomoreparties.co/v1/cohort-62/users/me/avatar', {
@@ -86,9 +86,21 @@ export class Api {
     return Promise.reject("Произошла ошибка")
   });
 }
+
+//Запрос на удаление карточки с сервера
+deleteCard(cardId) {
+  return fetch(`https://mesto.nomoreparties.co/v1/cohort-62/cards/${cardId}`, {
+  method: 'DELETE',
+  headers: this._headers
+  })
+  .then(res => {
+    if (res.ok) {
+      return res.json()
+    }
+    return Promise.reject("Произошла ошибка")
+  })
 }
-
-
+}
 
 
 
