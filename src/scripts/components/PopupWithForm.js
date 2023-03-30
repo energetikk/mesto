@@ -7,6 +7,7 @@ export default class PopupWithForm extends Popup {
     this._handleSubmitForm = handleSubmitForm;
     this.form = this.popupElement.querySelector('.form');
     this._inputList = this.form.querySelectorAll('.form__item');
+    this._submitButton = this.popupElement.querySelector('.form__submit')
   }
 
   _getInputValues() {
@@ -25,12 +26,17 @@ export default class PopupWithForm extends Popup {
     super.setEventListeners();
     this.form.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this._handleSubmitForm(this._getInputValues());
+      this._handleSubmitForm(this._getInputValues())
       this.closePopup();
     });
   }
 
-  closePopup() {
+  //Изменение надписи кнопки сабмита во время ожидания загрузки
+  changeButtonText(firstText) {
+    this._submitButton.textContent = firstText;
+  }
+
+closePopup() {
     super.closePopup();
     this.form.reset();
   }

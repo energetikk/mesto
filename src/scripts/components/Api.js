@@ -18,7 +18,7 @@ export class Api {
           return res.json();
         }
         // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
+        return Promise.reject(`Произошла ошибка: ${res.status}`);
       })
   }
 //Добавить карточку на сервер
@@ -34,7 +34,7 @@ export class Api {
         if (res.ok) {
           return res.json();
         }
-        return Promise.reject("Произошла ошибка")
+        return Promise.reject(`Произошла ошибка: ${res.status}`)
       });
     }
 
@@ -49,7 +49,7 @@ export class Api {
       return res.json();
     }
     // если ошибка, отклоняем промис
-    return Promise.reject(`Ошибка: ${res.status}`);
+    return Promise.reject(`Произошла ошибка: ${res.status}`);
   })
   }
 //Записать обновленную информацию о пользователе на сервер
@@ -64,13 +64,12 @@ export class Api {
       })})
     .then(res => {
       if (res.ok) {
-      return res.json();
+        return res.json();
     }
-    return Promise.reject("Произошла ошибка")
+    return Promise.reject(`Произошла ошибка: ${res.status}`)
   });
-
-
 }
+
 //Записать обновленный аватар пользователя на сервер
   setAvatar(data) {
     console.log(data)
@@ -82,9 +81,10 @@ export class Api {
       })})
     .then(res => {
       if (res.ok) {
-      return res.json();
+        return res.json();
     }
-    return Promise.reject("Произошла ошибка")
+    // если ошибка, отклоняем промис
+    return Promise.reject(`Произошла ошибка: ${res.status}`)
   });
 }
 
@@ -98,36 +98,39 @@ deleteCard(cardId) {
     if (res.ok) {
       return res.json()
     }
-    return Promise.reject("Произошла ошибка")
-  })
+    // если ошибка, отклоняем промис
+    return Promise.reject(`Произошла ошибка: ${res.status}`)
+  });
 }
 
-
-setLike(Id) {
-  return fetch(`https://mesto.nomoreparties.co/v1/cohort-62/cards/${Id}/likes`, {
+//Отправка запроса на присвоение лайка
+setLike(cardId) {
+  return fetch(`https://mesto.nomoreparties.co/v1/cohort-62/cards/${cardId}/likes`, {
     method: 'PUT',
     headers: this._headers
   })
-  .then((res) => {
+  .then(res => {
     if (res.ok) {
       return res.json()
     }
-    return Promise.reject("Произошла ошибка")
+    // если ошибка, отклоняем промис
+    return Promise.reject(`Произошла ошибка: ${res.status}`)
   })
 }
 
-removeLike(Id) {
-  return fetch(`https://mesto.nomoreparties.co/v1/cohort-62/cards/${Id}/likes`, {
+// Отправка запроса на удаление лайка
+removeLike(cardId) {
+  return fetch(`https://mesto.nomoreparties.co/v1/cohort-62/cards/${cardId}/likes`, {
     method: 'DELETE',
     headers: this._headers
   })
-  .then((res) => {
+  .then(res => {
     if (res.ok) {
       return res.json()
     }
-    return Promise.reject("Произошла ошибка")
-  })
-
+    // если ошибка, отклоняем промис
+    return Promise.reject(`Произошла ошибка: ${res.status}`)
+  });
 }
 }
 

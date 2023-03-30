@@ -1,20 +1,18 @@
 export class Card {
   constructor(data, templateSelector, handleCardClick, userId, {handleDeleteIconClick, likeDelete, likeAdd}) {
-    this._handleCardClick = handleCardClick;
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
     this._ownerId = data.owner._id
     this._userId = userId;
     this._cardId = data._id;
     this._likes = data.likes
+    this._handleDeleteIconClick = handleDeleteIconClick;
     this._likeDelete = likeDelete;
     this._likeAdd = likeAdd;
-
-
+    //Поиск лайков, которые принадлежат текущему пользователю
     this._liked = data.likes.find((user) => user._id === userId);
-
-    this._handleDeleteIconClick = handleDeleteIconClick;
   }
 
   _getTemplate() {
@@ -35,36 +33,18 @@ export class Card {
     this._cardImage.src = this._link;
     this._cardName.textContent = this._name;
     this._cardImage.alt = this._name;
-
     this._likesCounter = this._element.querySelector('.places__like-counter');
-
-
-    // this._likesCounter.textContent = this._likes.length;
-
-    if (this._likes.length > 0) {
-      this._likesCounter.textContent = this._likes.length;
-
-      } if (this._likes.length === 0) {
-        this._likesCounter.textContent = '';
-      }
-
-
-
-
+    this._likesCounter.textContent = this._likes.length;
     if (this._ownerId !== this._userId)
         this._deleteCardButton.remove();
-
     this._cardIsLiked();
-
-
     this._setEventListeners();
     return this._element;
   };
 
+  //установка слушателей
   _setEventListeners() {
     this._likeButton.addEventListener('click', () => {
-      // this._handleLikeClick();
-      console.log(this._likeButton.classList.contains('places__button-like_active'))
       if (this._likeButton.classList.contains('places__button-like_active')) {
         this._likeDelete(this._cardId);
       } else {
@@ -84,26 +64,22 @@ export class Card {
     this._element = null;
   }
 
+//Удаление карточки
   deleteCard() {
       this._element.remove();
       this._element = null;
     }
 
+//Установка счтечика лайков
   setLikesCount(arr) {
     this._likes = arr.likes;
-    if (this._likes.length > 0) {
     this._likesCounter.textContent = this._likes.length;
-
-    } else {
-      this._likesCounter.textContent = '';
-    }
     this._likeButton.classList.toggle("places__button-like_active");
   }
-
+//Если пользователь ставил лайк, то при первоначальном рендеринге страницы лайки пользователя закрасятся
   _cardIsLiked() {
     if (this._liked) {
       this._likeButton.classList.add("places__button-like_active");
     }
   }
-
 };

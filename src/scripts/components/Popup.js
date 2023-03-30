@@ -9,7 +9,6 @@ export default class Popup {
   openPopup() {
     this.popupElement.classList.add('popup_opened');
     document.addEventListener('keydown', this._handleEscClose);
-
 };
 
 //Универсальная функция закрытия попапов
@@ -29,7 +28,6 @@ setEventListeners() {
   this.buttonClose.addEventListener('click', () => {
     this.closePopup();
   })
-
   this.popupElement.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('popup_opened')) {
       this.closePopup();
