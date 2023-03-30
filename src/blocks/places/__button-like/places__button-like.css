@@ -19,6 +19,7 @@
 .places__like-counter {
   color: black;
   margin: 10px 0 0;
+  text-align: center;
 }
 
 .places__like {

@@ -19,7 +19,6 @@
 
 @media screen and (max-width: 615px) {
   .places__photo-cards {
-    /* grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); */
     grid-template-columns: 1fr;
   }
 }

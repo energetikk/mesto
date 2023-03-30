@@ -1,6 +1,7 @@
 // import { get } from "core-js/core/dict";
 
-import { data } from "autoprefixer";
+// import { data } from "autoprefixer";
+// import { reject } from "core-js/fn/promise";
 
 export class Api {
   constructor(config) {
@@ -100,9 +101,34 @@ deleteCard(cardId) {
     return Promise.reject("Произошла ошибка")
   })
 }
+
+
+setLike(Id) {
+  return fetch(`https://mesto.nomoreparties.co/v1/cohort-62/cards/${Id}/likes`, {
+    method: 'PUT',
+    headers: this._headers
+  })
+  .then((res) => {
+    if (res.ok) {
+      return res.json()
+    }
+    return Promise.reject("Произошла ошибка")
+  })
 }
 
+removeLike(Id) {
+  return fetch(`https://mesto.nomoreparties.co/v1/cohort-62/cards/${Id}/likes`, {
+    method: 'DELETE',
+    headers: this._headers
+  })
+  .then((res) => {
+    if (res.ok) {
+      return res.json()
+    }
+    return Promise.reject("Произошла ошибка")
+  })
 
-
+}
+}
 
 

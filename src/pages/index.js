@@ -44,21 +44,6 @@ const api = new Api({url: 'https://mesto.nomoreparties.co/v1/cohort-62/cards',
   }
 });
 
-// function handleDeleteIconClick(cardId) {
-//   popupConfirmDelete.openPopup();
-//   popupConfirmDelete.handleConfirm(() => {
-//     // console.log(card)
-//     api.deleteCard(cardId)
-//     .then(() => {
-//       // card._handleDeleteCardClick;
-//       // card.deleteCard();
-//       popupConfirmDelete.closePopup()
-//     })
-//   })
-// }
-
-
-
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([user, cards]) => {
@@ -69,15 +54,6 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
   .catch((err) => {
     console.log(err);
   });
-
-
-
-
-
-
-
-
-
 
 function addNewCard(item, userId) {
   const card = new Card(item, '#template-cards', () => handleCardClick(item.name, item.link), userId,
@@ -91,10 +67,23 @@ function addNewCard(item, userId) {
         popupConfirmDelete.closePopup()
       })
     })
-  }}
+  },
+  likeDelete: (cardId) => {
+    api.removeLike(cardId)
+    .then((data) => {
+      card.setLikesCount(data)
+    })
+  },
+  likeAdd: (cardId) => {
+    api.setLike(cardId)
+    .then((data) => {
+      card.setLikesCount(data)
+    })
+  }
+  }
+
 
   )
-
   return card.generateCard();
 };
 
@@ -110,7 +99,7 @@ function handleCardClick(name, link) {
 const cardSection = new Section({renderer:
   (item) => {cardSection.addItem(addNewCard(item, userId));}
    }, '.places__photo-cards');
-   api.getInitialCards()
+  //  api.getInitialCards()
 //    .then((data) => {
 //   cardSection.renderItems(data);
 // })
