@@ -65,6 +65,9 @@ function addNewCard(item, userId) {
       .then(() => {
         card.deleteCard();
         popupConfirmDelete.closePopup()
+        })
+        .catch((err) => {
+          console.log(err)
       })
     })
   },
@@ -73,12 +76,19 @@ function addNewCard(item, userId) {
     .then((data) => {
       card.setLikesCount(data)
     })
+    .catch((err) => {
+      console.log(err)
+    })
   },
   likeAdd: (cardId) => {
     api.setLike(cardId)
     .then((data) => {
       card.setLikesCount(data)
-    })}
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
   });
   return card.generateCard();
 };
@@ -101,8 +111,8 @@ popupFull.setEventListeners();
 
 
 function handleSubmitFormEdit(formData) {
-  popupProfileEdit.changeButtonText('Сохранение...');
-  api.setUserInfo(formData)
+  // popupProfileEdit.changeButtonText('Сохранение...');
+  return api.setUserInfo(formData)
   .then((data) => {
     userInfo.setUserInfo(data);
     popupProfileEdit.closePopup()
@@ -110,8 +120,8 @@ function handleSubmitFormEdit(formData) {
   .catch((err) => {
       console.log(err)
     })
-  .finally(() => {
-    popupProfileEdit.changeButtonText('Сохранить')})
+  // .finally(() => {
+  //   popupProfileEdit.changeButtonText('Сохранить')})
 }
 
 // создание экземпляра класса PopupWithForm редактирование профиля
@@ -120,8 +130,8 @@ popupProfileEdit.setEventListeners();
 
 
 function handleSubmitFormAdd(formData) {
-  popupFormAddProfile.changeButtonText('Сохранение...');
-  api.addCard(formData)
+  // popupFormAddProfile.changeButtonText('Сохранение...');
+  return api.addCard(formData)
   .then((data) => {
     cardSection.addItem(addNewCard(data, userId))
     popupFormAddProfile.closePopup()
@@ -129,8 +139,8 @@ function handleSubmitFormAdd(formData) {
   .catch((err) => {
       console.log(err)
     })
-  .finally(() => {
-    popupFormAddProfile.changeButtonText('Сохранить')})
+  // .finally(() => {
+  //   popupFormAddProfile.changeButtonText('Сохранить')})
 }
 
 //создание экземпляра класса PopupWithForm добавления новой карточки профиля
@@ -139,8 +149,8 @@ popupFormAddProfile.setEventListeners()
 
 
 function handleSubmitFormAvatar(formData) {
-  popupFormAvatarProfile.changeButtonText('Сохранение...');
-  api.setAvatar(formData)
+  // popupFormAvatarProfile.changeButtonText('Сохранение...');
+  return api.setAvatar(formData)
   .then((data) => {
     userInfo.setAvatarImage(data.avatar);
     popupFormAvatarProfile.closePopup()
@@ -148,8 +158,8 @@ function handleSubmitFormAvatar(formData) {
   .catch((err) => {
       console.log(err)
     })
-  .finally(() => {
-    popupFormAvatarProfile.changeButtonText('Сохранить')})
+  // .finally(() => {
+  //   popupFormAvatarProfile.changeButtonText('Сохранить')})
 }
 
 //создание экземпляра класса PopupWithForm редактирование аватара пользователя
